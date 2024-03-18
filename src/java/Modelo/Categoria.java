@@ -51,7 +51,3 @@ public class Categoria {
     }
 
 }
-//Piero
- ///fabrizio le gusta la ganpi
-//DS+
-//AHORA QUE MI KING 

@@ -78,5 +78,5 @@ public class Empleado {
     public void setUSUARIO(String USUARIO) {
         this.USUARIO = USUARIO;
     }
-
+//soy ichpas
 }
