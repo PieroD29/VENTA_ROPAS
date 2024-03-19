@@ -1,3 +1,5 @@
+//PARA BORRAR :V
+
 package Modelo;
 
 public class Producto {
