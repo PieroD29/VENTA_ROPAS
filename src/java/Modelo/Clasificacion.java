@@ -1,27 +1,27 @@
 package Modelo;
 
-public class Categoria {
-
-    int id_cat;
+public class Clasificacion {
+    
+    int id_clas;
     String descripcion;
     String img_dir;
 
-    public Categoria(int id_cat, String descripcion, String img_dir) {
-        this.id_cat = id_cat;
+    public Clasificacion(int id_clas, String descripcion, String img_dir) {
+        this.id_clas = id_clas;
         this.descripcion = descripcion;
         this.img_dir = img_dir;
     }
     
-    public Categoria(){
+    public Clasificacion(){
         
     }
 
-    public int getId_cat() {
-        return id_cat;
+    public int getId_clas() {
+        return id_clas;
     }
 
-    public void setId_cat(int id_cat) {
-        this.id_cat = id_cat;
+    public void setId_clas(int id_clas) {
+        this.id_clas = id_clas;
     }
 
     public String getDescripcion() {
@@ -39,9 +39,6 @@ public class Categoria {
     public void setImg_dir(String img_dir) {
         this.img_dir = img_dir;
     }
-
+        
+    
 }
-//HOLA1234
-//zcvsdvxcvx
-//holaaa
-//HOLA MI KINESIOLOGO 
