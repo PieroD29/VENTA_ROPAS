@@ -93,16 +93,88 @@ public class ProductosDAO {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
             ps.setInt(1, pro.getID_PROD());
-            ps.setString(2)
-            ps.setString(3)
-            ps.setDouble(4)
-            ps.setString(5)
-            ps.setInt(6)
-            ps.setBoolean(7)
-            ps.setInt(8)
-            
+            ps.setString(2, pro.getNOMBRE_PROD());
+            ps.setString(3, pro.getDESC_PROD());
+            ps.setDouble(4, pro.getPREC_PROD());
+            ps.setString(5, pro.getMODE_PROD());
+            ps.setInt(6, pro.getSTOCK_PROD());
+            ps.setBoolean(7, pro.isESTADO_PROD());
+            ps.setInt(8, pro.getID_CLASIFICACION());
+            ps.setInt(9, pro.getID_CATEGORIA());
+            ps.setInt(10, pro.getID_SUBCAT());
+            ps.setInt(11, pro.getID_MARCA());
+            respuesta = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return respuesta;
+    }
+    
+    public int actualizar(Productos pro) {
+        String sql = "UPDATE PRODUCTOS SET NOMBRE_PROD = ?, DESCRIPCION = ?, PRECIO = ?, MODELO = ?, STOCK = ?, ESTADO = ?, ID_CLAS = ?, ID_CAT = ?, ID_SBCAT = ?, ID_MARCA = ? WHERE ID_PROD = ?;";
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.setString(1, pro.getNOMBRE_PROD());
+            ps.setString(2, pro.getDESC_PROD());
+            ps.setDouble(3, pro.getPREC_PROD());
+            ps.setString(4, pro.getMODE_PROD());
+            ps.setInt(5, pro.getSTOCK_PROD());
+            ps.setBoolean(6, pro.isESTADO_PROD());
+            ps.setInt(7, pro.getID_CLASIFICACION());
+            ps.setInt(8, pro.getID_CATEGORIA());
+            ps.setInt(9, pro.getID_SUBCAT());
+            ps.setInt(10, pro.getID_MARCA());
+            ps.setInt(11, pro.getID_PROD());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar recursos y manejar excepciones aquí
+        }
+        return respuesta;
+    }
+    
+    public void eliminar(int id) {
+        String sql = "DELETE FROM PRODUCTOS WHERE ID_PROD = " + id;
+
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void activar(int id) {
+        String sql = "UPDATE PRODUCTOS SET ESTADO=1 WHERE ID_PROD = " + id;
+
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void desactivar(int id) {
+        String sql = "UPDATE PRODUCTOS SET ESTADO=0 WHERE ID_PROD = " + id;
+
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

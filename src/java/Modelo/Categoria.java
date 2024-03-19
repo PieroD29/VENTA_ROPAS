@@ -40,4 +40,8 @@ public class Categoria {
         this.img_dir = img_dir;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 05beacef2a7ab3724431e8a73eae8023f5415590
 }
