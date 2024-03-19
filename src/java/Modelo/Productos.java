@@ -118,4 +118,4 @@ public class Productos {
         this.ID_MARCA = ID_MARCA;
     }
 }
-//prueba
+//

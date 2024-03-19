@@ -2,85 +2,97 @@ package Modelo;
 
 public class Producto {
 
-    private int COD_PRODUCTO;
-    private String NOMBRE_PRODUCTO;
-    private String DESCRIPCION;
-    private double PRECIO_UNITARIO;
-    private int STOCK;
-    private boolean ESTADO;
-    private int ID_PROVEEDOR;
+    private int ID_PROD;
+    private String NOMBRE_PROD;
+    private String DESC_PROD;
+    private double PREC_PROD;
+    private String MODE_PROD;
+    private int STOCK_PROD;
+    private boolean ESTADO_PROD;
+    private int ID_CLASIFICACION;
     private int ID_CATEGORIA;
-    private String NOMBRE_CATEGORIA;
-    private String NOM_PROVEEDOR;
+    private int ID_SUBCAT;
+    private int ID_MARCA;
 
-    public Producto(int COD_PRODUCTO, String NOMBRE_PRODUCTO, String DESCRIPCION, double PRECIO_UNITARIO, int STOCK, boolean ESTADO, int ID_PROVEEDOR, int ID_CATEGORIA) {
-        this.COD_PRODUCTO = COD_PRODUCTO;
-        this.NOMBRE_PRODUCTO = NOMBRE_PRODUCTO;
-        this.DESCRIPCION = DESCRIPCION;
-        this.PRECIO_UNITARIO = PRECIO_UNITARIO;
-        this.STOCK = STOCK;
-        this.ESTADO = ESTADO;
-
+    public Producto(int ID_PROD, String NOMBRE_PROD, String DESC_PROD, double PREC_PROD, String MODE_PROD, int STOCK_PROD, boolean ESTADO_PROD, int ID_CLASIFICACION, int ID_CATEGORIA, int ID_SUBCAT, int ID_MARCA) {
+        this.ID_PROD = ID_PROD;
+        this.NOMBRE_PROD = NOMBRE_PROD;
+        this.DESC_PROD = DESC_PROD;
+        this.PREC_PROD = PREC_PROD;
+        this.MODE_PROD = MODE_PROD;
+        this.STOCK_PROD = STOCK_PROD;
+        this.ESTADO_PROD = ESTADO_PROD;
+        this.ID_CLASIFICACION = ID_CLASIFICACION;
+        this.ID_CATEGORIA = ID_CATEGORIA;
+        this.ID_SUBCAT = ID_SUBCAT;
+        this.ID_MARCA = ID_MARCA;
     }
 
     public Producto() {
-
     }
 
-    public int getCOD_PRODUCTO() {
-        return COD_PRODUCTO;
+    public int getID_PROD() {
+        return ID_PROD;
     }
 
-    public void setCOD_PRODUCTO(int COD_PRODUCTO) {
-        this.COD_PRODUCTO = COD_PRODUCTO;
+    public void setID_PROD(int ID_PROD) {
+        this.ID_PROD = ID_PROD;
     }
 
-    public String getNOMBRE_PRODUCTO() {
-        return NOMBRE_PRODUCTO;
+    public String getNOMBRE_PROD() {
+        return NOMBRE_PROD;
     }
 
-    public void setNOMBRE_PRODUCTO(String NOMBRE_PRODUCTO) {
-        this.NOMBRE_PRODUCTO = NOMBRE_PRODUCTO;
+    public void setNOMBRE_PROD(String NOMBRE_PROD) {
+        this.NOMBRE_PROD = NOMBRE_PROD;
     }
 
-    public String getDESCRIPCION() {
-        return DESCRIPCION;
+    public String getDESC_PROD() {
+        return DESC_PROD;
     }
 
-    public void setDESCRIPCION(String DESCRIPCION) {
-        this.DESCRIPCION = DESCRIPCION;
+    public void setDESC_PROD(String DESC_PROD) {
+        this.DESC_PROD = DESC_PROD;
     }
 
-    public double getPRECIO_UNITARIO() {
-        return PRECIO_UNITARIO;
+    public double getPREC_PROD() {
+        return PREC_PROD;
     }
 
-    public void setPRECIO_UNITARIO(double PRECIO_UNITARIO) {
-        this.PRECIO_UNITARIO = PRECIO_UNITARIO;
+    public void setPREC_PROD(double PREC_PROD) {
+        this.PREC_PROD = PREC_PROD;
     }
 
-    public int getSTOCK() {
-        return STOCK;
+    public String getMODE_PROD() {
+        return MODE_PROD;
     }
 
-    public void setSTOCK(int STOCK) {
-        this.STOCK = STOCK;
+    public void setMODE_PROD(String MODE_PROD) {
+        this.MODE_PROD = MODE_PROD;
     }
 
-    public boolean isESTADO() {
-        return ESTADO;
+    public int getSTOCK_PROD() {
+        return STOCK_PROD;
     }
 
-    public void setESTADO(boolean ESTADO) {
-        this.ESTADO = ESTADO;
+    public void setSTOCK_PROD(int STOCK_PROD) {
+        this.STOCK_PROD = STOCK_PROD;
     }
 
-    public int getID_PROVEEDOR() {
-        return ID_PROVEEDOR;
+    public boolean isESTADO_PROD() {
+        return ESTADO_PROD;
     }
 
-    public void setID_PROVEEDOR(int ID_PROVEEDOR) {
-        this.ID_PROVEEDOR = ID_PROVEEDOR;
+    public void setESTADO_PROD(boolean ESTADO_PROD) {
+        this.ESTADO_PROD = ESTADO_PROD;
+    }
+
+    public int getID_CLASIFICACION() {
+        return ID_CLASIFICACION;
+    }
+
+    public void setID_CLASIFICACION(int ID_CLASIFICACION) {
+        this.ID_CLASIFICACION = ID_CLASIFICACION;
     }
 
     public int getID_CATEGORIA() {
@@ -91,20 +103,22 @@ public class Producto {
         this.ID_CATEGORIA = ID_CATEGORIA;
     }
 
-    public String getNOMBRE_CATEGORIA() {
-        return NOMBRE_CATEGORIA;
+    public int getID_SUBCAT() {
+        return ID_SUBCAT;
     }
 
-    public void setNOMBRE_CATEGORIA(String NOMBRE_CATEGORIA) {
-        this.NOMBRE_CATEGORIA = NOMBRE_CATEGORIA;
+    public void setID_SUBCAT(int ID_SUBCAT) {
+        this.ID_SUBCAT = ID_SUBCAT;
     }
 
-    public String getNOM_PROVEEDOR() {
-        return NOM_PROVEEDOR;
+    public int getID_MARCA() {
+        return ID_MARCA;
     }
 
-    public void setNOM_PROVEEDOR(String NOM_PROVEEDOR) {
-        this.NOM_PROVEEDOR = NOM_PROVEEDOR;
+    public void setID_MARCA(int ID_MARCA) {
+        this.ID_MARCA = ID_MARCA;
     }
+
+    
 
 }
