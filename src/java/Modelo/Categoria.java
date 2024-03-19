@@ -40,18 +40,4 @@ public class Categoria {
         this.img_dir = img_dir;
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 90eceeda5ce7c915914fa7ba101bf0dc29b5e770
 }
-//HOLA1234
-//zcvsdvxcvx
-//holaaa
-<<<<<<< HEAD
-//HOLA MI KINESIOLOGO
-    
-
-=======
-//HOLA MI KINESIOLOGO 
->>>>>>> 90eceeda5ce7c915914fa7ba101bf0dc29b5e770
