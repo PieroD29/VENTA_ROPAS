@@ -2,12 +2,12 @@ package Modelo;
 
 public class Usuarios {
 
-    int id_user;
-    String usuario;
-    String contra;
-    String perfil;
-    String nivel;
-    String otros;
+    private int id_user;
+    private String usuario;
+    private String contra;
+    private String perfil;
+    private String nivel;
+    private String otros;
     
     
     public Usuarios() {

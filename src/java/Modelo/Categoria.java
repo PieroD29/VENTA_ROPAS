@@ -51,7 +51,4 @@ public class Categoria {
     }
 
 }
-//HOLA1234
-//zcvsdvxcvx
-//holaaa
-//HOLA MI KINESIOLOGO 
+ 
