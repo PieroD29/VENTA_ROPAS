@@ -40,3 +40,4 @@ public class Categoria {
         this.img_dir = img_dir;
     }
 
+}
