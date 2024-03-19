@@ -1,82 +1,73 @@
 package Modelo;
 
-public class Empleado {
+public class Usuarios {
 
-    int ID_VENDEDOR;
-    String DNI;
-    String NOMBRE_VENDEDOR;
-    String FECHA_CONTRATO;
-    double SALARIO;
-    String ESTADO_VENDEDOR;
-    String USUARIO;
+    int id_user;
+    String usuario;
+    String contra;
+    String perfil;
+    String nivel;
+    String otros;
     
-    public Empleado() {
+    
+    public Usuarios() {
     }
 
-    public Empleado(int ID_VENDEDOR, String DNI, String NOMBRE_VENDEDOR, String FECHA_CONTRATO, double SALARIO, String ESTADO_VENDEDOR, String USUARIO) {
-        this.ID_VENDEDOR = ID_VENDEDOR;
-        this.DNI = DNI;
-        this.NOMBRE_VENDEDOR = NOMBRE_VENDEDOR;
-        this.FECHA_CONTRATO = FECHA_CONTRATO;
-        this.SALARIO = SALARIO;
-        this.ESTADO_VENDEDOR = ESTADO_VENDEDOR;
-        this.USUARIO = USUARIO;
+    public Usuarios(int id_user, String usuario, String contra, String perfil, String nivel, String otros) {
+        this.id_user = id_user;
+        this.usuario = usuario;
+        this.contra = contra;
+        this.perfil = perfil;
+        this.nivel = nivel;
+        this.otros = otros;
     }
 
-    public int getID_VENDEDOR() {
-        return ID_VENDEDOR;
+    public int getid_user() {
+        return id_user;
     }
 
-    public void setID_VENDEDOR(int ID_VENDEDOR) {
-        this.ID_VENDEDOR = ID_VENDEDOR;
+    public void setid_user(int id_user) {
+        this.id_user = id_user;
     }
 
-    public String getDNI() {
-        return DNI;
+    public String getusuario() {
+        return usuario;
     }
 
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
+    public void setusuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public String getNOMBRE_VENDEDOR() {
-        return NOMBRE_VENDEDOR;
+    public String getcontra() {
+        return contra;
     }
 
-    public void setNOMBRE_VENDEDOR(String NOMBRE_VENDEDOR) {
-        this.NOMBRE_VENDEDOR = NOMBRE_VENDEDOR;
+    public void setcontra(String contra) {
+        this.contra = contra;
     }
 
-    public String getFECHA_CONTRATO() {
-        return FECHA_CONTRATO;
+    public String getperfil() {
+        return perfil;
     }
 
-    public void setFECHA_CONTRATO(String FECHA_CONTRATO) {
-        this.FECHA_CONTRATO = FECHA_CONTRATO;
+    public void setperfil(String perfil) {
+        this.perfil = perfil;
     }
 
-    public double getSALARIO() {
-        return SALARIO;
+    public String getnivel() {
+        return nivel;
     }
 
-    public void setSALARIO(double SALARIO) {
-        this.SALARIO = SALARIO;
+    public void setnivel(String nivel) {
+        this.nivel = nivel;
     }
 
-    public String getESTADO_VENDEDOR() {
-        return ESTADO_VENDEDOR;
+    public String getotros() {
+        return otros;
     }
 
-    public void setESTADO_VENDEDOR(String ESTADO_VENDEDOR) {
-        this.ESTADO_VENDEDOR = ESTADO_VENDEDOR;
+    public void setotros(String otros) {
+        this.otros = otros;
     }
-
-    public String getUSUARIO() {
-        return USUARIO;
-    }
-
-    public void setUSUARIO(String USUARIO) {
-        this.USUARIO = USUARIO;
-    }
-//soy ichpas
+ 
 }
