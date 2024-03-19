@@ -86,4 +86,23 @@ public class ProductosDAO {
         }
         return lista;
     }
+    
+    public int agregar(Productos pro){
+        String sql = "INSERT INTO PRODUCTOS(ID_PROD, NOMBRE_PROD, DESCRIPCION, PRECIO, MODELO, STOCK, ESTADO, ID_CLAS, ID_CAT, ID_SBCAT, ID_MARCA) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.setInt(1, pro.getID_PROD());
+            ps.setString(2)
+            ps.setString(3)
+            ps.setDouble(4)
+            ps.setString(5)
+            ps.setInt(6)
+            ps.setBoolean(7)
+            ps.setInt(8)
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
