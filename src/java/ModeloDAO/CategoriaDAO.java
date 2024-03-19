@@ -20,7 +20,7 @@ public class CategoriaDAO {
 
     public List<Categoria> obtenerTodasLasCategorias() {
         List<Categoria> categorias = new ArrayList<>();
-        String sql = "SELECT * FROM CATEGORIA";
+        String sql = "SELECT id_cat, descripcion, imagen FROM vista_Categoria;";
 
         try {
             conexion = conn.getConnection();
@@ -29,10 +29,9 @@ public class CategoriaDAO {
 
             while (result.next()) {
                 Categoria categoria = new Categoria();
-                categoria.setID_CATEGORIA(result.getInt("ID_CATEGORIA"));
-                categoria.setNOMBRE_CATEGORIA(result.getString("NOMBRE_CATEGORIA"));
-                categoria.setDESCRIPCION(result.getString("DESCRIPCION"));
-                categoria.setESTADO(result.getBoolean("ESTADO"));
+                categoria.setId_cat(result.getInt("id_cat"));
+                categoria.setDescripcion(result.getString("descripcion"));
+                categoria.setImg_dir(result.getString("imagen"));
                 categorias.add(categoria);
             }
         } catch (SQLException e) {
@@ -66,18 +65,17 @@ public class CategoriaDAO {
     }
 
     public List listar() {
-        String sql = "SELECT * FROM CATEGORIA";
+        String sql = "SELECT id_cat, descripcion, imagen FROM vista_Categoria;";
         ArrayList<Categoria> lista = new ArrayList<>();
         try {
-            conexion = conn.getConnection();//
+            conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
                 Categoria cate = new Categoria();
-                cate.setID_CATEGORIA(result.getInt(1));
-                cate.setNOMBRE_CATEGORIA(result.getString(2));
-                cate.setDESCRIPCION(result.getString(3));
-                cate.setESTADO(result.getBoolean(4));
+                cate.setId_cat(result.getInt(1));
+                cate.setDescripcion(result.getString(2));
+                cate.setImg_dir(result.getString(3));
                 lista.add(cate);
             }
         } catch (Exception e) {
@@ -110,14 +108,14 @@ public class CategoriaDAO {
     }
 
     public int agregar(Categoria cate) {
-        String sql = "INSERT INTO CATEGORIA(NOMBRE_CATEGORIA, DESCRIPCION, ESTADO) "
+        String sql = "INSERT INTO CATEGORIA(id_cat, descripcion, imagen) "
                 + "VALUES(?, ?, ?)";
         try {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
-            ps.setString(1, cate.getNOMBRE_CATEGORIA());
-            ps.setString(2, cate.getDESCRIPCION());
-            ps.setBoolean(3, cate.isESTADO());
+            ps.setInt(1, cate.getId_cat());
+            ps.setString(2, cate.getDescripcion());
+            ps.setString(3, cate.getImg_dir());
             respuesta = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -145,15 +143,15 @@ public class CategoriaDAO {
     public Categoria listarId(int id) {
 
         Categoria cate = new Categoria();
-        String sql = "SELECT * FROM CATEGORIA WHERE ID_CATEGORIA=" + id;
+        String sql = "SELECT id_cat, descripcion, imagen FROM vista_Categoria WHERE id_cat=" + id;
         try {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
-                cate.setNOMBRE_CATEGORIA(result.getString(2));
-                cate.setDESCRIPCION(result.getString(3));
-                cate.setESTADO(result.getBoolean(4));
+                cate.setId_cat(Integer.parseInt(result.getString(1)));
+                cate.setDescripcion(result.getString(2));
+                cate.setImg_dir(result.getString(3));
             }
         } catch (Exception e) {
 
@@ -162,15 +160,14 @@ public class CategoriaDAO {
     }
 
     public int actualizar(Categoria cat) {
-        String sql = "UPDATE CATEGORIA SET NOMBRE_CATEGORIA = ?, DESCRIPCION= ?, ESTADO = ?  WHERE ID_CATEGORIA = ?";
+        String sql = "UPDATE CATEGORIA SET DESCRIPCION= ?, IMAGEN = ?  WHERE ID_CAT = ?";
 
         try {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
-            ps.setString(1, cat.getNOMBRE_CATEGORIA());
-            ps.setString(2, cat.getDESCRIPCION());
-            ps.setBoolean(3, cat.isESTADO());
-            ps.setInt(4, cat.getID_CATEGORIA());
+            ps.setString(1, cat.getDescripcion());
+            ps.setString(2, cat.getImg_dir());
+            ps.setInt(3, cat.getId_cat());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -182,7 +179,7 @@ public class CategoriaDAO {
     }
 
     public void eliminar(int id) {
-        String sql = "DELETE FROM CATEGORIA WHERE ID_CATEGORIA =" + id;
+        String sql = "DELETE FROM CATEGORIA WHERE ID_CAT =" + id;
 
         try {
             conexion = conn.getConnection();
