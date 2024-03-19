@@ -42,7 +42,7 @@ public class Especificaciones {
         this.descripcion = descripcion;
     }
 
-    public int id_prod() {
+    public int getid_prod() {
         return id_prod;
     }
 
