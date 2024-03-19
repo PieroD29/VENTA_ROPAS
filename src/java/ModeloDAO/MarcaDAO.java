@@ -17,5 +17,114 @@ public class MarcaDAO {
     ResultSet result;
     int respuesta;
     
+    public Marca buscar(int id){
+        
+        Marca mar = new Marca();
+        String sql = "SELECT * FROM MARCA WHERE ID_MARCA =" + id;
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            result = ps.executeQuery();
+            while(result.next()) {
+                mar.setID_MARCA(result.getInt(1));
+                mar.setNOMBRE_MARCA(result.getString(2));
+                mar.setESTADO_MARCA(result.getBoolean(3));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mar;
+    }
     
+    public int actualizarnombre(int id, String nombre) {
+        String sql = "UPDATE MARCA SET NOMBRE = ? WHERE ID_MARCA = ?";
+        
+        try{
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
+    
+    public List listar(){
+        String sql = "SELECT * FROM MARCA";
+        ArrayList<Marca> lista = new ArrayList<>();
+        try{
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            result = ps.executeQuery();
+            while(result.next()){
+                Marca mar = new Marca();
+                mar.setID_MARCA(result.getInt(1));
+                mar.setNOMBRE_MARCA(result.getString(2));
+                mar.setESTADO_MARCA(result.getBoolean(3));
+                lista.add(mar);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+    
+    public int agregar(Marca mar){
+        String sql = "INSERT INTO MARCA(ID_MARCA, NOMBRE, ESTADO) VALUES(?,?,?)";
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.setInt(1, mar.getID_MARCA());
+            ps.setString(2, mar.getNOMBRE_MARCA());
+            ps.setBoolean(3, mar.isESTADO_MARCA());
+            respuesta = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return respuesta;
+    }
+    
+    public void eliminar(int id) {
+        String sql = "DELETE FROM MARCA WHERE ID_MARCA = " + id;
+
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void activar(int id) {
+        String sql = "UPDATE MARCA SET ESTADO = 1 WHERE ID_MARCA = " + id;
+
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void desactivar(int id) {
+        String sql = "UPDATE MARCA SET ESTADO = 0 WHERE ID_MARCA = " + id;
+
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
