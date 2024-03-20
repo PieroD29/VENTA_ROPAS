@@ -416,6 +416,17 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("Clasificaciones.jsp").forward(request, response);
 
         }
+        if (menu.equals("ReportesClasificaciones")) {
+            switch (accion) {
+                case "reporteclasificacion":
+                    List<Clasificacion> lista = clasificacionDAO.listar();
+                    request.setAttribute("clasificacion", lista);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("reporteClasificaciones.jsp").forward(request, response);
+        }
         //-----------------------
         
         //----------------------------------------CATEGORIA
@@ -426,11 +437,9 @@ public class Controlador_tabla extends HttpServlet {
                     request.setAttribute("categorias", lista);
                     break;
                 case "Agregar":
-                    String id_cat = request.getParameter("txtnombre");
                     String descripcion = request.getParameter("txtdescripcion");
-                    String img_dir = request.getParameter("txtestado");
+                    String img_dir = request.getParameter("txtdir_imagen");
 
-                    cate.setId_cat(Integer.parseInt(id_cat));
                     cate.setDescripcion(descripcion);
                     cate.setImg_dir(img_dir);
                     categoriaDAO.agregar(cate);
@@ -445,7 +454,7 @@ public class Controlador_tabla extends HttpServlet {
                     break;
                 case "Actualizar":
                     String descripcion1 = request.getParameter("txtdescripcion");
-                    String img_dir1 = request.getParameter("txtestado");
+                    String img_dir1 = request.getParameter("txtdir_imagen");
                     
                     cate.setDescripcion(descripcion1);
                     cate.setImg_dir(img_dir1);
@@ -462,7 +471,18 @@ public class Controlador_tabla extends HttpServlet {
                     throw new AssertionError();
             }
             request.getRequestDispatcher("Categorias.jsp").forward(request, response);
-
+            
+        }
+        if (menu.equals("ReportesCategorias")) {
+            switch (accion) {
+                case "reportecategoria":
+                    List<Categoria> lista = categoriaDAO.listar();
+                    request.setAttribute("categorias", lista);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("reporteCategorias.jsp").forward(request, response);
         }
         //-----------------------
         //----------------------------------------SUBCATEGORIA
@@ -510,6 +530,17 @@ public class Controlador_tabla extends HttpServlet {
             }
             request.getRequestDispatcher("subCategorias.jsp").forward(request, response);
 
+        }
+        if (menu.equals("ReportesSubCategorias")) {
+            switch (accion) {
+                case "reportesubcategoria":
+                    List<SubCategoria> lista = subCateDAO.listar();
+                    request.setAttribute("subCategorias", lista);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("reporteSubCategorias.jsp").forward(request, response);
         }
         //-----------------------
         

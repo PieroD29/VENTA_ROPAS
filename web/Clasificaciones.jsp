@@ -1,9 +1,8 @@
 <%-- 
-    Document   : Categorias
-    Created on : 23 oct 2023, 1:39:33
-    Author     : HP SUPPORT
+    Document   : Clasificaciones
+    Created on : 20 mar. 2024, 12:08:32
+    Author     : W10
 --%>
-
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -69,8 +68,8 @@
     </head>
     <body>
         <div style="margin-left: 280px;">
-            <h1>LISTA DE CATEGORIAS</h1>
-             <a class="btn btn-primary"  href="Controlador_tabla?menu=ReportesCategorias&accion=reportecategoria"><strong>ReporteExcel de Categorias</strong></a> 
+            <h1>LISTA DE CLASIFICACIONES</h1>
+             <a class="btn btn-primary"  href="Controlador_tabla?menu=ReportesClasificaciones&accion=reporteclasificacion"><strong>ReporteExcel de Clasificaciones</strong></a> 
         </div>
         <div class="container">
             <div class="table-container">
@@ -79,19 +78,19 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>CATEGORIA</th>
+                            <th>CLASIFICACION</th>
                             <th>IMAGEN</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="cate" items="${categorias}">
+                        <c:forEach var="clasi" items="${clasificaciones}">
                             <tr>
-                                <td>${cate.getId_cat()}</td>
-                                <td>${cate.getDescripcion()}</td>
-                                <td>${cate.getImg_dir()}</td>
-                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Categorias&accion=Update&id=${cate.Id_cat}">Update</a></td>
-                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Categorias&accion=Delete&id=<c:out value='${cate.Id_cat}' />">Delete</a></td>
+                                <td>${clasi.getId_clas()}</td>
+                                <td>${clasi.getDescripcion()}</td>
+                                <td>${clasi.getImg_dir()}</td>
+                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Clasificacion&accion=Update&id=${clasi.Id_clas}">Update</a></td>
+                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Clasificacion&accion=Delete&id=<c:out value='${clasi.Id_clas}' />">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -101,14 +100,14 @@
         <div class="form-container">
             <div class="card">
                 <div class="card-body">
-                    <form action="Controlador_tabla?menu=Categorias" action="Controlador_tabla?menu=ReportesCategorias" method="POST">
+                    <form action="Controlador_tabla?menu=Clasificacion" action="Controlador_tabla?menu=ReportesClasificaciones" method="POST">
                         <div class="form-group">
-                            <label>DESCRIPCION_CATEGORIA</label>
-                            <input type="text" value="${categoria.descripcion}" name="txtdescripcion" class="form-control">
+                            <label>DESCRIPCION_CLASIFICACION</label>
+                            <input type="text" value="${clasificaion.descripcion}" name="txtdescripcion" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>IMAGEN</label>
-                            <input type="text" value="${categoria.img_dir}" name="txtdir_imagen" class="form-control">
+                            <input type="text" value="${clasificacion.img_dir}" name="txtdir_imagen" class="form-control">
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
