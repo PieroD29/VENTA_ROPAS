@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
 
-    private static String url = "jdbc:mysql://localhost:3306/proyectofinal?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
+    private static String url = "jdbc:mysql://localhost:3306/prueba_inventario?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false";
     private static String usuario = "root";
     private static String contraseña = "admin";
     // private static String driver = "com.mysql.cj.jdbc.Driver";
