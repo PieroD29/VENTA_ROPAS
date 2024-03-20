@@ -18,7 +18,7 @@ public class SubCategoriaDAO {
 
     int respuesta;
 
-    public List<SubCategoria> obtenerTodasLasCategorias() {
+    public List<SubCategoria> obtenerTodasLasSubCategorias() {
         List<SubCategoria> categorias = new ArrayList<>();
         String sql = "SELECT id_sbcat, descripcion, imagen FROM vista_subCat;";
 

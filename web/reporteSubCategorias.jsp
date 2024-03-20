@@ -12,18 +12,18 @@
     </head>
     <body>
         <center> 
-            <h1>Reporte Categorias</h1>
+            <h1>Reporte SubCategorias</h1>
             <table border="1">
                 <tr>
                     <th>ID</th>
                     <th>DESCRIPCION</th>
                     <th>IMAGEN</th>
                 </tr>
-                <c:forEach  items="${categorias}" var="cate">
+                <c:forEach  items="${subcategorias}" var="sbcate">
                     <tr>
-                        <td>${cate.getId_cat()}</td>
-                        <td>${cate.getDescripcion()}</td>
-                        <td>${cate.getImg_dir()}</td>
+                        <td>${sbcate.getId_sbcat()}</td>
+                        <td>${sbcate.getDescripcion()}</td>
+                        <td>${sbcate.getImg_dir()}</td>
                     </tr>
                 </c:forEach>
             </table>

@@ -80,20 +80,18 @@
                         <tr>
                             <th>#</th>
                             <th>CATEGORIA</th>
-                            <th>DESCRIPCION</th>
-                            <th>ESTADO</th>
+                            <th>IMAGEN</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="cate" items="${categorias}">
                             <tr>
-                                <td>${cate.getID_CATEGORIA()}</td>
-                                <td>${cate.getNOMBRE_CATEGORIA()}</td>
-                                <td>${cate.getDESCRIPCION()}</td>
-                                <td>${cate.isESTADO()}</td>
-                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Categorias&accion=Update&id=${cate.ID_CATEGORIA}">Update</a></td>
-                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Categorias&accion=Delete&id=<c:out value='${cate.ID_CATEGORIA}' />">Delete</a></td>
+                                <td>${cate.getId_cat()}</td>
+                                <td>${cate.getDescripcion()}</td>
+                                <td>${cate.getImg_dir()}</td>
+                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Categorias&accion=Update&id=${cate.Id_cat}">Update</a></td>
+                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Categorias&accion=Delete&id=<c:out value='${cate.Id_cat}' />">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -105,16 +103,12 @@
                 <div class="card-body">
                     <form action="Controlador_tabla?menu=Categorias" action="Controlador_tabla?menu=ReportesCategorias" method="POST">
                         <div class="form-group">
-                            <label>NOMBRE_CATEGORIA</label>
-                            <input type="text" value="${categoria.NOMBRE_CATEGORIA}" name="txtnombre" class="form-control">
+                            <label>DESCRIPCION_CATEGORIA</label>
+                            <input type="text" value="${categoria.descripcion}" name="txtdescripcion" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>DESCRIPCION</label>
-                            <input type="text" value="${categoria.DESCRIPCION}" name="txtdescripcion" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>ESTADO</label>
-                            <input type="text" value="${categoria.ESTADO}" name="txtestado" class="form-control">
+                            <label>IMAGEN</label>
+                            <input type="text" value="${categoria.img_dir}" name="txtdir_imagen" class="form-control">
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">

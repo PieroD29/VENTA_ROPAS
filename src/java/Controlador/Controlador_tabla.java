@@ -8,7 +8,16 @@ import Modelo.Usuarios;
 import Modelo.Especificaciones;
 import Modelo.SubCategoria;
 import Modelo.Cliente;
+<<<<<<< HEAD
 import Modelo.Productos;
+=======
+import Modelo.Cliente_direccion;
+import Modelo.Direccion;
+import Modelo.Empleado;
+import Modelo.Producto;
+import Modelo.Proveedor;
+import Modelo.Telefono;
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
 import Modelo.Venta;
 import ModeloDAO.BoletaDAO;
 import ModeloDAO.ClasificacionDAO;
@@ -16,7 +25,17 @@ import ModeloDAO.CategoriaDAO;
 import ModeloDAO.UsuariosDAO;
 import ModeloDAO.EspecificacionesDAO;
 import ModeloDAO.SubCategoriaDAO;
+<<<<<<< HEAD
 import ModeloDAO.ProductosDAO;
+=======
+import ModeloDAO.ClienteDAO;
+import ModeloDAO.Cliente_direccionDAO;
+import ModeloDAO.DireccionDAO;
+import ModeloDAO.EmpleadoDAO;
+import ModeloDAO.ProductoDAO;
+import ModeloDAO.ProveedorDAO;
+import ModeloDAO.TelefonoDAO;
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
 import ModeloDAO.VentaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,15 +75,35 @@ public class Controlador_tabla extends HttpServlet {
     Categoria cate = new Categoria();
     CategoriaDAO categoriaDAO = new CategoriaDAO();
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
 //--------------------------------------------------
     SubCategoria sbcate = new SubCategoria();
     SubCategoriaDAO subCateDAO = new SubCategoriaDAO();
     
 //--------------------------------------------------
+<<<<<<< HEAD
  
  
  
+=======
+    Producto pro = new Producto();
+    ProductoDAO productoDAO = new ProductoDAO();
+
+//--------------------------------------------------
+    Telefono tel = new Telefono();
+    TelefonoDAO telefonoDAO = new TelefonoDAO();
+
+//--------------------------------------------------
+    Direccion dir = new Direccion();
+    DireccionDAO direccionDAO = new DireccionDAO();
+
+//--------------------------------------------------
+    Cliente_direccion cli_dir = new Cliente_direccion();
+    Cliente_direccionDAO cliente_direccionDAO = new Cliente_direccionDAO();
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
 
 //--------------------------------------------------
     Boleta bole = new Boleta();
@@ -247,6 +286,7 @@ public class Controlador_tabla extends HttpServlet {
 
             request.getRequestDispatcher("Especificaciones.jsp").forward(request, response);
         }
+<<<<<<< HEAD
  
         if (menu.equals("ReportesEspecificaciones")) {
             switch (accion) {
@@ -261,6 +301,8 @@ public class Controlador_tabla extends HttpServlet {
             }
             request.getRequestDispatcher("reporteEspecificaciones.jsp").forward(request, response);
         }
+=======
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
         
         //----------------------------------------CLASIFICACION
         if (menu.equals("Clasificacion")) {
@@ -308,10 +350,27 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("Clasificaciones.jsp").forward(request, response);
 
         }
+<<<<<<< HEAD
     
         
         //----------------------------------------CATEGORIA
  
+=======
+        if (menu.equals("ReportesClasificaciones")) {
+            switch (accion) {
+                case "reporteclasificacion":
+                    List<Clasificacion> lista = clasificacionDAO.listar();
+                    request.setAttribute("clasificacion", lista);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("reporteClasificaciones.jsp").forward(request, response);
+        }
+        //-----------------------
+        
+        //----------------------------------------CATEGORIA
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
         if (menu.equals("Categorias")) {
             switch (accion) {
                 case "Read":
@@ -319,11 +378,9 @@ public class Controlador_tabla extends HttpServlet {
                     request.setAttribute("categorias", lista);
                     break;
                 case "Agregar":
-                    String id_cat = request.getParameter("txtnombre");
                     String descripcion = request.getParameter("txtdescripcion");
-                    String img_dir = request.getParameter("txtestado");
+                    String img_dir = request.getParameter("txtdir_imagen");
 
-                    cate.setId_cat(Integer.parseInt(id_cat));
                     cate.setDescripcion(descripcion);
                     cate.setImg_dir(img_dir);
                     categoriaDAO.agregar(cate);
@@ -338,7 +395,7 @@ public class Controlador_tabla extends HttpServlet {
                     break;
                 case "Actualizar":
                     String descripcion1 = request.getParameter("txtdescripcion");
-                    String img_dir1 = request.getParameter("txtestado");
+                    String img_dir1 = request.getParameter("txtdir_imagen");
                     
                     cate.setDescripcion(descripcion1);
                     cate.setImg_dir(img_dir1);
@@ -355,15 +412,30 @@ public class Controlador_tabla extends HttpServlet {
                     throw new AssertionError();
             }
             request.getRequestDispatcher("Categorias.jsp").forward(request, response);
-
+            
         }
+        if (menu.equals("ReportesCategorias")) {
+            switch (accion) {
+                case "reportecategoria":
+                    List<Categoria> lista = categoriaDAO.listar();
+                    request.setAttribute("categorias", lista);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("reporteCategorias.jsp").forward(request, response);
+        }
+<<<<<<< HEAD
  
  
+=======
+        //-----------------------
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
         //----------------------------------------SUBCATEGORIA
         if (menu.equals("subCategorias")) {
             switch (accion) {
                 case "Read":
-                    List<Categoria> lista = subCateDAO.listar();
+                    List<SubCategoria> lista = subCateDAO.listar();
                     request.setAttribute("subcategoria", lista);
                     break;
                 case "Agregar":
@@ -405,8 +477,23 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("subCategorias.jsp").forward(request, response);
 
         }
+        if (menu.equals("ReportesSubCategorias")) {
+            switch (accion) {
+                case "reportesubcategoria":
+                    List<SubCategoria> lista = subCateDAO.listar();
+                    request.setAttribute("subCategorias", lista);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("reporteSubCategorias.jsp").forward(request, response);
+        }
         //-----------------------
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
         
         if (menu.equals("Productos")) {
             switch (accion) {
