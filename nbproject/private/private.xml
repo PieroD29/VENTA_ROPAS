@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/ModeloDAO/EspecificacionesDAO.java</file>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/ModeloDAO/CategoriaDAO.java</file>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/Controlador/Validar.java</file>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/Modelo/Especificaciones.java</file>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/Modelo/SubCategoria.java</file>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/Modelo/Categoria.java</file>
+            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/Controlador/Controlador_tabla.java</file>
+            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/ModeloDAO/SubCategoriaDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -2,7 +2,9 @@ package Controlador;
 
 import Config.GenerarSerie;
 import Modelo.Boleta;
+import Modelo.Clasificacion;
 import Modelo.Categoria;
+import Modelo.SubCategoria;
 import Modelo.Cliente;
 import Modelo.Cliente_direccion;
 import Modelo.Direccion;
@@ -12,7 +14,9 @@ import Modelo.Proveedor;
 import Modelo.Telefono;
 import Modelo.Venta;
 import ModeloDAO.BoletaDAO;
+import ModeloDAO.ClasificacionDAO;
 import ModeloDAO.CategoriaDAO;
+import ModeloDAO.SubCategoriaDAO;
 import ModeloDAO.ClienteDAO;
 import ModeloDAO.Cliente_direccionDAO;
 import ModeloDAO.DireccionDAO;
@@ -49,9 +53,17 @@ public class Controlador_tabla extends HttpServlet {
     ClienteDAO clienteDAO = new ClienteDAO();
 
 //--------------------------------------------------
+    Clasificacion clasi = new Clasificacion();
+    ClasificacionDAO clasificacionDAO = new ClasificacionDAO();
+    
+//--------------------------------------------------
     Categoria cate = new Categoria();
     CategoriaDAO categoriaDAO = new CategoriaDAO();
 
+//--------------------------------------------------
+    SubCategoria sbcate = new SubCategoria();
+    SubCategoriaDAO subCateDAO = new SubCategoriaDAO();
+    
 //--------------------------------------------------
     Producto pro = new Producto();
     ProductoDAO productoDAO = new ProductoDAO();
@@ -357,6 +369,56 @@ public class Controlador_tabla extends HttpServlet {
             }
             request.getRequestDispatcher("reporteClientes.jsp").forward(request, response);
         }
+        
+        //----------------------------------------CLASIFICACION
+        if (menu.equals("Clasificacion")) {
+            switch (accion) {
+                case "Read":
+                    List<Clasificacion> lista = clasificacionDAO.listar();
+                    request.setAttribute("clasificacion", lista);
+                    break;
+                case "Agregar":
+                    String id_clas = request.getParameter("txtnombre");
+                    String descripcion = request.getParameter("txtdescripcion");
+                    String img_dir = request.getParameter("txtestado");
+
+                    clasi.setId_clas(Integer.parseInt(id_clas));
+                    clasi.setDescripcion(descripcion);
+                    clasi.setImg_dir(img_dir);
+                    clasificacionDAO.agregar(clasi);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Clasificaciones&accion=Read").forward(request, response);
+                    break;
+
+                case "Update":
+                    ide = Integer.parseInt(request.getParameter("id_clas"));
+                    Clasificacion clas = clasificacionDAO.listarId(ide);
+                    request.setAttribute("clasificacion", clas);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Clasificaciones&accion=Read").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String descripcion1 = request.getParameter("txtdescripcion");
+                    String img_dir1 = request.getParameter("txtestado");
+                    
+                    clasi.setDescripcion(descripcion1);
+                    clasi.setImg_dir(img_dir1);
+                    clasi.setId_clas(ide);
+                    clasificacionDAO.actualizar(clasi);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Clasificaciones&accion=Read").forward(request, response);
+                    break;
+                case "Delete":
+                    ide = Integer.parseInt(request.getParameter("id_clas"));
+                    clasificacionDAO.eliminar(ide);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Clasificaciones&accion=Read").forward(request, response);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+            request.getRequestDispatcher("Clasificaciones.jsp").forward(request, response);
+
+        }
+        //-----------------------
+        
+        //----------------------------------------CATEGORIA
         if (menu.equals("Categorias")) {
             switch (accion) {
                 case "Read":
@@ -364,51 +426,35 @@ public class Controlador_tabla extends HttpServlet {
                     request.setAttribute("categorias", lista);
                     break;
                 case "Agregar":
-                    String nombre = request.getParameter("txtnombre");
+                    String id_cat = request.getParameter("txtnombre");
                     String descripcion = request.getParameter("txtdescripcion");
-                    String estado = request.getParameter("txtestado");
-                    boolean estadoInt;
+                    String img_dir = request.getParameter("txtestado");
 
-                    if (estado != null && !estado.isEmpty()) {
-                        estadoInt = Boolean.parseBoolean(estado);
-                    } else {
-                        // En este caso, el valor de "estado" está vacío o nulo, puedes tomar una acción específica o asignar un valor predeterminado.
-                        estadoInt = false; // O cualquier otro valor predeterminado que desees.
-                    }
-                    cate.setNOMBRE_CATEGORIA(nombre);
-                    cate.setDESCRIPCION(descripcion);
-                    cate.setESTADO(estadoInt);
+                    cate.setId_cat(Integer.parseInt(id_cat));
+                    cate.setDescripcion(descripcion);
+                    cate.setImg_dir(img_dir);
                     categoriaDAO.agregar(cate);
                     request.getRequestDispatcher("Controlador_tabla?menu=Categorias&accion=Read").forward(request, response);
                     break;
+
                 case "Update":
-                    ide = Integer.parseInt(request.getParameter("id"));
+                    ide = Integer.parseInt(request.getParameter("id_cat"));
                     Categoria ca = categoriaDAO.listarId(ide);
                     request.setAttribute("categoria", ca);
                     request.getRequestDispatcher("Controlador_tabla?menu=Categorias&accion=Read").forward(request, response);
                     break;
                 case "Actualizar":
-                    String nombre1 = request.getParameter("txtnombre");
                     String descripcion1 = request.getParameter("txtdescripcion");
-                    String estado1 = request.getParameter("txtestado");
-                    boolean estadoInt1;
-
-                    if (estado1 != null && !estado1.isEmpty()) {
-                        estadoInt1 = Boolean.parseBoolean(estado1);
-                    } else {
-                        // En este caso, el valor de "estado" está vacío o nulo, puedes tomar una acción específica o asignar un valor predeterminado.
-                        estadoInt1 = false; // O cualquier otro valor predeterminado que desees.
-                    }
-
-                    cate.setNOMBRE_CATEGORIA(nombre1);
-                    cate.setDESCRIPCION(descripcion1);
-                    cate.setESTADO(estadoInt1);
-                    cate.setID_CATEGORIA(ide);
+                    String img_dir1 = request.getParameter("txtestado");
+                    
+                    cate.setDescripcion(descripcion1);
+                    cate.setImg_dir(img_dir1);
+                    cate.setId_cat(ide);
                     categoriaDAO.actualizar(cate);
                     request.getRequestDispatcher("Controlador_tabla?menu=Categorias&accion=Read").forward(request, response);
                     break;
                 case "Delete":
-                    ide = Integer.parseInt(request.getParameter("id"));
+                    ide = Integer.parseInt(request.getParameter("id_cat"));
                     categoriaDAO.eliminar(ide);
                     request.getRequestDispatcher("Controlador_tabla?menu=Categorias&accion=Read").forward(request, response);
                     break;
@@ -418,17 +464,55 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("Categorias.jsp").forward(request, response);
 
         }
-        if (menu.equals("ReportesCategorias")) {
+        //-----------------------
+        //----------------------------------------SUBCATEGORIA
+        if (menu.equals("subCategorias")) {
             switch (accion) {
-                case "reportecategoria":
-                    List<Categoria> lista = categoriaDAO.listar();
-                    request.setAttribute("categorias", lista);
+                case "Read":
+                    List<Categoria> lista = subCateDAO.listar();
+                    request.setAttribute("subcategoria", lista);
+                    break;
+                case "Agregar":
+                    String id_sbcat = request.getParameter("txtnombre");
+                    String descripcion = request.getParameter("txtdescripcion");
+                    String img_dir = request.getParameter("txtestado");
+
+                    sbcate.setId_sbcat(Integer.parseInt(id_sbcat));
+                    sbcate.setDescripcion(descripcion);
+                    sbcate.setImg_dir(img_dir);
+                    subCateDAO.agregar(sbcate);
+                    request.getRequestDispatcher("Controlador_tabla?menu=subCategorias&accion=Read").forward(request, response);
+                    break;
+
+                case "Update":
+                    ide = Integer.parseInt(request.getParameter("id_sbcat"));
+                    SubCategoria sbcat = subCateDAO.listarId(ide);
+                    request.setAttribute("subcategorias", sbcat);
+                    request.getRequestDispatcher("Controlador_tabla?menu=subCategorias&accion=Read").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String descripcion1 = request.getParameter("txtdescripcion");
+                    String img_dir1 = request.getParameter("txtestado");
+                    
+                    sbcate.setDescripcion(descripcion1);
+                    sbcate.setImg_dir(img_dir1);
+                    sbcate.setId_sbcat(ide);
+                    subCateDAO.actualizar(sbcate);
+                    request.getRequestDispatcher("Controlador_tabla?menu=subCategorias&accion=Read").forward(request, response);
+                    break;
+                case "Delete":
+                    ide = Integer.parseInt(request.getParameter("id_sbcat"));
+                    subCateDAO.eliminar(ide);
+                    request.getRequestDispatcher("Controlador_tabla?menu=subCategorias&accion=Read").forward(request, response);
                     break;
                 default:
                     throw new AssertionError();
             }
-            request.getRequestDispatcher("reporteCategorias.jsp").forward(request, response);
+            request.getRequestDispatcher("subCategorias.jsp").forward(request, response);
+
         }
+        //-----------------------
+        
         if (menu.equals("Productos")) {
             switch (accion) {
                 case "Read":

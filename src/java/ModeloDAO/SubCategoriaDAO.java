@@ -1,17 +1,16 @@
 package ModeloDAO;
 
-import Config.Conexion;
-import Modelo.Clasificacion;
+import Modelo.SubCategoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import Config.Conexion;
 
-
-
-public class ClasificacionDAO {
+public class SubCategoriaDAO {
+    
     Conexion conn = new Conexion();
     Connection conexion;
     PreparedStatement ps;
@@ -19,9 +18,9 @@ public class ClasificacionDAO {
 
     int respuesta;
 
-    public List<Clasificacion> obtenerTodasLasClasificaciones() {
-        List<Clasificacion> clasificaciones = new ArrayList<>();
-        String sql = "SELECT * FROM vista_clasificacion;";
+    public List<SubCategoria> obtenerTodasLasCategorias() {
+        List<SubCategoria> categorias = new ArrayList<>();
+        String sql = "SELECT id_sbcat, descripcion, imagen FROM vista_subCat;";
 
         try {
             conexion = conn.getConnection();
@@ -29,11 +28,11 @@ public class ClasificacionDAO {
             result = ps.executeQuery();
 
             while (result.next()) {
-                Clasificacion clasificacion = new Clasificacion();
-                clasificacion.setId_clas(result.getInt("id_clas"));
-                clasificacion.setDescripcion(result.getString("descripcion"));
-                clasificacion.setImg_dir(result.getString("imagen"));
-                clasificaciones.add(clasificacion);
+                SubCategoria sbCategoria = new SubCategoria();
+                sbCategoria.setId_sbcat(result.getInt("id_sbcat"));
+                sbCategoria.setDescripcion(result.getString("descripcion"));
+                sbCategoria.setImg_dir(result.getString("imagen"));
+                categorias.add(sbCategoria);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,22 +61,22 @@ public class ClasificacionDAO {
             }
         }
 
-        return clasificaciones;
+        return categorias;
     }
 
     public List listar() {
-        String sql = "SELECT id_clas, descripcion, imagen FROM vista_clasificacion;";
-        ArrayList<Clasificacion> lista = new ArrayList<>();
+        String sql = "SELECT id_sbcat, descripcion, imagen FROM vista_subCat;";
+        ArrayList<SubCategoria> lista = new ArrayList<>();
         try {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
-                Clasificacion clasi = new Clasificacion();
-                clasi.setId_clas(result.getInt(1));
-                clasi.setDescripcion(result.getString(2));
-                clasi.setImg_dir(result.getString(3));
-                lista.add(clasi);
+                SubCategoria sbCate = new SubCategoria();
+                sbCate.setId_sbcat(result.getInt(1));
+                sbCate.setDescripcion(result.getString(2));
+                sbCate.setImg_dir(result.getString(3));
+                lista.add(sbCate);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,15 +107,15 @@ public class ClasificacionDAO {
         return lista;
     }
 
-    public int agregar(Clasificacion clasi) {
-        String sql = "INSERT INTO CLASIFICACION(id_clas, descripcion, imagen) "
+    public int agregar(SubCategoria sbcate) {
+        String sql = "INSERT INTO SUBCATEGORIA(id_sbcat, descripcion, imagen) "
                 + "VALUES(?, ?, ?)";
         try {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
-            ps.setInt(1, clasi.getId_clas());
-            ps.setString(2, clasi.getDescripcion());
-            ps.setString(3, clasi.getImg_dir());
+            ps.setInt(1, sbcate.getId_sbcat());
+            ps.setString(2, sbcate.getDescripcion());
+            ps.setString(3, sbcate.getImg_dir());
             respuesta = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,34 +140,34 @@ public class ClasificacionDAO {
         return respuesta;
     }
 
-    public Clasificacion listarId(int id) {
+    public SubCategoria listarId(int id) {
 
-        Clasificacion clasi = new Clasificacion();
-        String sql = "SELECT id_clas, descripcion, imagen FROM vista_clasificacion WHERE id_clas=" + id;
+        SubCategoria sbcate = new SubCategoria();
+        String sql = "SELECT id_cat, descripcion, imagen FROM vista_subCat WHERE id_sbcat=" + id;
         try {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
             result = ps.executeQuery();
             while (result.next()) {
-                clasi.setId_clas(Integer.parseInt(result.getString(1)));
-                clasi.setDescripcion(result.getString(2));
-                clasi.setImg_dir(result.getString(3));
+                sbcate.setId_sbcat(Integer.parseInt(result.getString(1)));
+                sbcate.setDescripcion(result.getString(2));
+                sbcate.setImg_dir(result.getString(3));
             }
         } catch (Exception e) {
 
         }
-        return clasi;
+        return sbcate;
     }
 
-    public int actualizar(Clasificacion clasi) {
-        String sql = "UPDATE CLASIFICACION SET DESCRIPCION= ?, IMAGEN = ?  WHERE ID_CLAS = ?";
+    public int actualizar(SubCategoria sbcat) {
+        String sql = "UPDATE SUBCATEGORIA SET DESCRIPCION= ?, IMAGEN = ?  WHERE ID_SBCAT = ?";
 
         try {
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
-            ps.setString(1, clasi.getDescripcion());
-            ps.setString(2, clasi.getImg_dir());
-            ps.setInt(3, clasi.getId_clas());
+            ps.setString(1, sbcat.getDescripcion());
+            ps.setString(2, sbcat.getImg_dir());
+            ps.setInt(3, sbcat.getId_sbcat());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -180,7 +179,7 @@ public class ClasificacionDAO {
     }
 
     public void eliminar(int id) {
-        String sql = "DELETE FROM CLASIFICACION WHERE ID_CLAS =" + id;
+        String sql = "DELETE FROM SUBCATEGORIA WHERE ID_SBCAT =" + id;
 
         try {
             conexion = conn.getConnection();
@@ -192,4 +191,5 @@ public class ClasificacionDAO {
         }
 
     }
+    
 }

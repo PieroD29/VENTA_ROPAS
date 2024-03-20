@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import Config.Conexion;
-import Modelo.Boleta;
-import Modelo.Producto;
 
 public class ClienteDAO {
 
