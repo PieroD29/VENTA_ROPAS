@@ -4,12 +4,8 @@ import Config.GenerarSerie;
 import Modelo.Boleta;
 import Modelo.Clasificacion;
 import Modelo.Categoria;
-<<<<<<< HEAD
- 
 import Modelo.Usuarios;
 import Modelo.Especificaciones;
- 
-=======
 import Modelo.SubCategoria;
 import Modelo.Cliente;
 import Modelo.Cliente_direccion;
@@ -18,17 +14,12 @@ import Modelo.Empleado;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import Modelo.Telefono;
->>>>>>> 2b44fc1ce7a6f101663b287dc91809e5188a4ceb
 import Modelo.Venta;
 import ModeloDAO.BoletaDAO;
 import ModeloDAO.ClasificacionDAO;
 import ModeloDAO.CategoriaDAO;
-<<<<<<< HEAD
- 
 import ModeloDAO.UsuariosDAO;
 import ModeloDAO.EspecificacionesDAO;
- 
-=======
 import ModeloDAO.SubCategoriaDAO;
 import ModeloDAO.ClienteDAO;
 import ModeloDAO.Cliente_direccionDAO;
@@ -37,7 +28,6 @@ import ModeloDAO.EmpleadoDAO;
 import ModeloDAO.ProductoDAO;
 import ModeloDAO.ProveedorDAO;
 import ModeloDAO.TelefonoDAO;
->>>>>>> 2b44fc1ce7a6f101663b287dc91809e5188a4ceb
 import ModeloDAO.VentaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -76,10 +66,6 @@ public class Controlador_tabla extends HttpServlet {
     Categoria cate = new Categoria();
     CategoriaDAO categoriaDAO = new CategoriaDAO();
 
-<<<<<<< HEAD
- 
- 
-=======
 //--------------------------------------------------
     SubCategoria sbcate = new SubCategoria();
     SubCategoriaDAO subCateDAO = new SubCategoriaDAO();
@@ -99,7 +85,6 @@ public class Controlador_tabla extends HttpServlet {
 //--------------------------------------------------
     Cliente_direccion cli_dir = new Cliente_direccion();
     Cliente_direccionDAO cliente_direccionDAO = new Cliente_direccionDAO();
->>>>>>> 2b44fc1ce7a6f101663b287dc91809e5188a4ceb
 
 //--------------------------------------------------
     Boleta bole = new Boleta();
@@ -268,21 +253,6 @@ public class Controlador_tabla extends HttpServlet {
             }
 
             request.getRequestDispatcher("Especificaciones.jsp").forward(request, response);
-        }
-<<<<<<< HEAD
-        
-         
-=======
-        if (menu.equals("ReportesClientes")) {
-            switch (accion) {
-                case "reportecliente":
-                    List<Cliente> lista = clienteDAO.listar();
-                    request.setAttribute("clientes", lista);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteClientes.jsp").forward(request, response);
         }
         
         //----------------------------------------CLASIFICACION
