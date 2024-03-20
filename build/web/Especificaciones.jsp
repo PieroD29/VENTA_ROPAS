@@ -68,63 +68,67 @@
     <body>
         <div class="container">
             <div class="table-container">
-                <h1>&nbsp;LISTA DE USUARIOS</h1>
+                <h1>&nbsp;LISTA DE ESPECIFICACIONES</h1>
                 <br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>USUARIO</th>
-                            <th>CONTRASEÑA</th>
-                            <th>PERFIL</th>
-                            <th>NIVEL</th>
-                            <th>OTROS</th>
+                            <th>TITULO</th>
+                            <th>DESCRIPCION</th>
+                            <th>PRODUCTO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="usua" items="${usuarios}">
+                        <c:forEach var="espe" items="${especificaciones}">
                             <tr>
-                                <td> ${usua.getid_user()} </td>
-                                <td> ${usua.getusuario()} </td>
-                                <td> ${usua.getcontra()} </td>
-                                <td> ${usua.getperfil()} </td>
-                                <td>${usua.getnivel()}</td>
-                                <td> ${usua.getotros()}</td>
-                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Usuarios&accion=Update&id=${usua.id_user}">Update</a></td>
-                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Usuarios&accion=Delete&id=${usua.id_user}">Delete</a></td>
+                                <td> ${espe.getid_esp()} </td>
+                                <td> ${espe.gettitulo()} </td>
+                                <td> ${espe.getdescripcion()} </td>
+                                <td>
+                                    <c:forEach var="producto" items="${productos}">
+                                        <c:if test="${producto.id_prod == pro.id_prod}">
+                                            ${producto.NOMBRE_PROD}
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Especificaciones&accion=Update&id=${espe.id_esp}">Update</a></td>
+                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Especificaciones&accion=Delete&id=${espe.id_esp}">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                     <a class="btn btn-primary" href="Controlador_tabla?menu=ReportesUsuarios&accion=reporteusuario"><strong>ReporteExcel de Usuarios</strong></a> 
+                     <a class="btn btn-primary" href="Controlador_tabla?menu=ReportesEspecificaciones&accion=reporteespecificacion"><strong>ReporteExcel de Especificaciones</strong></a> 
                 </table>
             </div>
         </div>
         <div class="form-container">
             <div class="card">
                 <div class="card-body">
-                    <form action="Controlador_tabla?menu=Usuarios" action="Controlador_tabla?menu=ReportesUsuarios" method="POST">
-                        <input type="text" name="perfil" id="perfilInput" placeholder="Perfil del Usuario">
-                        <input type="submit" name="accion" value="BuscarUsuario" class="btn btn-outline-info">
+                    <form action="Controlador_tabla?menu=Especificaciones" action="Controlador_tabla?menu=ReportesEspecificaciones" method="POST">
                         <div class="form-group">
-                            <label>USUARIO</label>
-                            <input type="text" value="${usuario.usuario}" name="txtusuario" class="form-control">
+                            <label>TITULO</label>
+                            <input type="text" value="${especificacion.titulo}" name="txttitulo" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>CONTRASEÑA</label>
-                            <input type="text" value="${usuario.contra}" name="txtcontra" class="form-control">
+                            <label>DESCRIPCION</label>
+                            <input type="text" value="${especificacion.descripcion}" name="txtdescripcion" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>PERFIL</label>
-                            <input type="text" value="${usuario.perfil}" name="txtperfil" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>NIVEL</label>
-                            <input type="text" value="${usuario.nivel}" name="txtnivel" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>OTROS</label>
-                            <input type="text" value="${usuario.otros}" name="txtotros" class="form-control">
+                            <label>PRODUCTO</label>
+                            <select name="txtproducto" class="form-control">
+                                <option value="">Seleccione un producto</option>
+                                <c:forEach var="producto" items="${productos}">
+                                    <c:choose>
+                                        <c:when test="${producto.id_prod == especificacion.id_prod}">
+                                            <option value="${producto.id_prod}" selected>${producto.NOMBRE_PROD}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${producto.id_prod}">${producto.NOMBRE_PROD}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">

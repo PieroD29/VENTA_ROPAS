@@ -12,27 +12,25 @@
     </head>
     <body>
     <center> 
-        <h1>Reporte Empleados</h1>
+        <h1>Reporte Usuarios</h1>
 
         <table border="1">
             <tr>
                 <th>ID</th>
-                <th>DNI</th>
-                <th>NOMBRES</th>
-                <th>FECHA_CONTRATO</th>
-                <th>SALARIO</th>
-                <th>ESTADO</th>
                 <th>USUARIO</th>
+                <th>CONTRASE�A</th>
+                <th>PERFIL</th>
+                <th>NIVEL</th>
+                <th>OTROS</th>
             </tr>
-            <c:forEach items="${vendedores}" var="vende">
+            <c:forEach items="${usuarios}" var="usua">
                 <tr>
-                    <td> ${vende.getID_VENDEDOR()} </td>
-                    <td> ${vende.getDNI()} </td>
-                    <td> ${vende.getNOMBRE_VENDEDOR()} </td>
-                    <td> ${vende.getFECHA_CONTRATO()} </td>
-                    <td>${vende.getSALARIO()}</td>
-                    <td> ${vende.getESTADO_VENDEDOR()}</td>
-                    <td> ${vende.getUSUARIO()}</td>
+                    <td> ${usua.getid_user()} </td>
+                    <td> ${usua.getusuario()} </td>
+                    <td> ${usua.getcontra()} </td>
+                    <td> ${usua.getperfil()} </td>
+                    <td> ${usua.getnivel()}</td>
+                    <td> ${usua.getotros()}</td>
                 </tr>
             </c:forEach>
         </table>

@@ -44,6 +44,52 @@ public class ProductosDAO {
         return pro;
     }
     
+    public List<Productos> obtenerTodosLosProductos() {
+        List<Productos> productos = new ArrayList<>();
+        String sql = "SELECT * FROM productos";
+
+        try {
+            conexion = conn.getConnection();
+            ps = conexion.prepareStatement(sql);
+            result = ps.executeQuery();
+
+            while (result.next()) {
+                Productos producto = new Productos();
+                producto.setID_PROD(result.getInt("id_prod"));
+                producto.setNOMBRE_PROD(result.getString("nombre_prod"));
+                // Puedes agregar otras propiedades del proveedor si es necesario
+                productos.add(producto);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cierre de recursos aquí
+            if (result != null) {
+                try {
+                    result.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (conexion != null) {
+                try {
+                    conexion.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return productos;
+    }
+    
     public int actualizarstock(int id, int stock) {
         String sql = "UPDATE PRODUCTOS SET STOCK=? WHERE ID_PROD=?";
         

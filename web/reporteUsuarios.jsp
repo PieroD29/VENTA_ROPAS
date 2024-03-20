@@ -18,7 +18,7 @@
             <tr>
                 <th>ID</th>
                 <th>USUARIO</th>
-                <th>CONTRASEÑA</th>
+                <th>CONTRASEï¿½A</th>
                 <th>PERFIL</th>
                 <th>NIVEL</th>
                 <th>OTROS</th>
@@ -27,7 +27,7 @@
                 <tr>
                     <td> ${usua.getid_user()} </td>
                     <td> ${usua.getusuario()} </td>
-                    <td> ${usua.getcontraseña()} </td>
+                    <td> ${usua.getcontra()} </td>
                     <td> ${usua.getperfil()} </td>
                     <td> ${usua.getnivel()}</td>
                     <td> ${usua.getotros()}</td>

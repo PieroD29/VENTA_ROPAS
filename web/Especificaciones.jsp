@@ -68,69 +68,67 @@
     <body>
         <div class="container">
             <div class="table-container">
-                <h1>&nbsp;LISTA DE EMPLEADOS</h1>
+                <h1>&nbsp;LISTA DE ESPECIFICACIONES</h1>
                 <br>
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>DNI</th>
-                            <th>NOMBRES</th>
-                            <th>FECHA_CONTRATO</th>
-                            <th>SALARIO</th>
-                            <th>ESTADO</th>
-                            <th>USUARIO</th>
+                            <th>TITULO</th>
+                            <th>DESCRIPCION</th>
+                            <th>PRODUCTO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="vende" items="${vendedores}">
+                        <c:forEach var="espe" items="${especificaciones}">
                             <tr>
-                                <td> ${vende.getID_VENDEDOR()} </td>
-                                <td> ${vende.getDNI()} </td>
-                                <td> ${vende.getNOMBRE_VENDEDOR()} </td>
-                                <td> ${vende.getFECHA_CONTRATO()} </td>
-                                <td>${vende.getSALARIO()}</td>
-                                <td> ${vende.getESTADO_VENDEDOR()}</td>
-                                <td> ${vende.getUSUARIO()}</td>
-                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Vendedores&accion=Update&id=${vende.ID_VENDEDOR}">Update</a></td>
-                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Vendedores&accion=Delete&id=${vende.ID_VENDEDOR}">Delete</a></td>
+                                <td> ${espe.getid_esp()} </td>
+                                <td> ${espe.gettitulo()} </td>
+                                <td> ${espe.getdescripcion()} </td>
+                                <td>
+                                    <c:forEach var="producto" items="${productos}">
+                                        <c:if test="${producto.id_prod == pro.id_prod}">
+                                            ${producto.NOMBRE_PROD}
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Especificaciones&accion=Update&id=${espe.id_esp}">Update</a></td>
+                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Especificaciones&accion=Delete&id=${espe.id_esp}">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
-                     <a class="btn btn-primary" href="Controlador_tabla?menu=Reportes&accion=reporte"><strong>ReporteExcel de Empleados</strong></a> 
+                     <a class="btn btn-primary" href="Controlador_tabla?menu=ReportesEspecificaciones&accion=reporteespecificacion"><strong>ReporteExcel de Especificaciones</strong></a> 
                 </table>
             </div>
         </div>
         <div class="form-container">
             <div class="card">
                 <div class="card-body">
-                    <form action="Controlador_tabla?menu=Vendedores" action="Controlador_tabla?menu=Reportes" method="POST">
-                        <input type="text" name="codigoempleado" id="dniInput" placeholder="DNI del Empleado">
-                        <input type="submit" name="accion" value="BuscarEmpleado" class="btn btn-outline-info">
+                    <form action="Controlador_tabla?menu=Especificaciones" action="Controlador_tabla?menu=ReportesEspecificaciones" method="POST">
                         <div class="form-group">
-                            <label>DNI</label>
-                            <input type="text" value="${vendedor.DNI}" name="txtdni" class="form-control">
+                            <label>TITULO</label>
+                            <input type="text" value="${especificacion.titulo}" name="txttitulo" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>NOMBRES</label>
-                            <input type="text" value="${vendedor.NOMBRE_VENDEDOR}" name="txtnombres" class="form-control">
+                            <label>DESCRIPCION</label>
+                            <input type="text" value="${especificacion.descripcion}" name="txtdescripcion" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>FECHA_CONTRATO</label>
-                            <input type="text" value="${vendedor.FECHA_CONTRATO}" name="txtfecha" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>SALARIO</label>
-                            <input type="number" value="${vendedor.SALARIO}" name="txtsalario" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>ESTADO</label>
-                            <input type="text" value="${vendedor.ESTADO_VENDEDOR}" name="txtestado" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>USUARIO</label>
-                            <input type="text" value="${vendedor.USUARIO}" name="txtusuario" class="form-control">
+                            <label>PRODUCTO</label>
+                            <select name="txtproducto" class="form-control">
+                                <option value="">Seleccione un producto</option>
+                                <c:forEach var="producto" items="${productos}">
+                                    <c:choose>
+                                        <c:when test="${producto.id_prod == especificacion.id_prod}">
+                                            <option value="${producto.id_prod}" selected>${producto.NOMBRE_PROD}</option>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <option value="${producto.id_prod}">${producto.NOMBRE_PROD}</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </select>
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
