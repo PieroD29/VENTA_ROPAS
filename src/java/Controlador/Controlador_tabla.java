@@ -3,23 +3,17 @@ package Controlador;
 import Config.GenerarSerie;
 import Modelo.Boleta;
 import Modelo.Categoria;
-import Modelo.Cliente;
-import Modelo.Cliente_direccion;
-import Modelo.Direccion;
-import Modelo.Empleado;
-import Modelo.Producto;
-import Modelo.Proveedor;
-import Modelo.Telefono;
+ 
+import Modelo.Usuarios;
+import Modelo.Especificaciones;
+ 
 import Modelo.Venta;
 import ModeloDAO.BoletaDAO;
 import ModeloDAO.CategoriaDAO;
-import ModeloDAO.ClienteDAO;
-import ModeloDAO.Cliente_direccionDAO;
-import ModeloDAO.DireccionDAO;
-import ModeloDAO.EmpleadoDAO;
-import ModeloDAO.ProductoDAO;
-import ModeloDAO.ProveedorDAO;
-import ModeloDAO.TelefonoDAO;
+ 
+import ModeloDAO.UsuariosDAO;
+import ModeloDAO.EspecificacionesDAO;
+ 
 import ModeloDAO.VentaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,14 +30,16 @@ import javax.servlet.http.HttpServletResponse;
 public class Controlador_tabla extends HttpServlet {
 
     //RequestDispatcher dispatcher = null;
-    Empleado vende = new Empleado();
-    EmpleadoDAO vendedorDAO = new EmpleadoDAO();
+    Usuarios usua = new Usuarios();
+    UsuariosDAO usuarioDAO = new UsuariosDAO();
     int ide;
-
+    
 //--------------------------------------------------
-    Proveedor prove = new Proveedor();
-    ProveedorDAO proveedorDAO = new ProveedorDAO();
+    
+    Especificaciones espe = new Especificaciones();
+    EspecificacionesDAO especificacionDAO = new EspecificacionesDAO();
 
+ 
 //--------------------------------------------------
     Cliente cli = new Cliente();
     ClienteDAO clienteDAO = new ClienteDAO();
@@ -52,21 +48,8 @@ public class Controlador_tabla extends HttpServlet {
     Categoria cate = new Categoria();
     CategoriaDAO categoriaDAO = new CategoriaDAO();
 
-//--------------------------------------------------
-    Producto pro = new Producto();
-    ProductoDAO productoDAO = new ProductoDAO();
-
-//--------------------------------------------------
-    Telefono tel = new Telefono();
-    TelefonoDAO telefonoDAO = new TelefonoDAO();
-
-//--------------------------------------------------
-    Direccion dir = new Direccion();
-    DireccionDAO direccionDAO = new DireccionDAO();
-
-//--------------------------------------------------
-    Cliente_direccion cli_dir = new Cliente_direccion();
-    Cliente_direccionDAO cliente_direccionDAO = new Cliente_direccionDAO();
+ 
+ 
 
 //--------------------------------------------------
     Boleta bole = new Boleta();
@@ -96,267 +79,148 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
         }
 
-        if (menu.equals("Vendedores")) {
+        if (menu.equals("Usuarios")) {
             switch (accion) {
-                case "BuscarEmpleado":
-                    String DNI = request.getParameter("codigoempleado");
-                    if (DNI != null && !DNI.isEmpty()) {
-                        List<Empleado> lista = new ArrayList<>();
-                       Empleado vende = vendedorDAO.buscar(DNI);
-                        if (vende != null) {
-                            lista.add(vende);
+                case "BuscarUsuario":
+                    String perfil = request.getParameter("perfil");
+                    if (perfil != null && !perfil.isEmpty()) {
+                        List<Usuarios> lista = new ArrayList<>();
+                       Usuarios usua = usuarioDAO.buscar(perfil);
+                        if (usua != null) {
+                            lista.add(usua);
                         }
-                        request.setAttribute("vendedores", lista);
+                        request.setAttribute("usuarios", lista);
                     } else {
                         // Si el campo de búsqueda está vacío, muestra todos los proveedores.
-                        List<Empleado> lista = vendedorDAO.listar();
-                        request.setAttribute("vendedores", lista);
+                        List<Usuarios> lista = usuarioDAO.listar();
+                        request.setAttribute("usuarios", lista);
                     }
                     break;
                 case "Read":
-                    List<Empleado> lista = vendedorDAO.listar();
-                    request.setAttribute("vendedores", lista);
+                    List<Usuarios> lista = usuarioDAO.listar();
+                    request.setAttribute("usuarios", lista);
                     break;
                 case "Agregar":
-                    String dni = request.getParameter("txtdni");
-                    String nombre = request.getParameter("txtnombres");
-                    String fecha = request.getParameter("txtfecha");
-                    String salario = request.getParameter("txtsalario");
-                    String estado = request.getParameter("txtestado");
-
-                    double salarioDouble = 0.0;
-                    try {
-                        salarioDouble = Double.parseDouble(salario);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
                     String usuario = request.getParameter("txtusuario");
-                    vende.setDNI(dni);
-                    vende.setNOMBRE_VENDEDOR(nombre);
-                    vende.setFECHA_CONTRATO(fecha);
-                    vende.setSALARIO(salarioDouble);
-                    vende.setESTADO_VENDEDOR(estado);
-                    vende.setUSUARIO(usuario);
-                    vendedorDAO.agregar(vende);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
+                    String contra = request.getParameter("txtcontra");
+                    String perfiles = request.getParameter("txtperfil");
+                    String nivel = request.getParameter("txtnivel");
+                    String otros = request.getParameter("txtotros");
+                    usua.setusuario(usuario);
+                    usua.setcontra(contra);
+                    usua.setperfil(perfiles);
+                    usua.setnivel(nivel);
+                    usua.setotros(otros);
+                    usuarioDAO.agregar(usua);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
                     break;
                 case "Update":
                     ide = Integer.parseInt(request.getParameter("id"));
-                    Empleado v = vendedorDAO.listarId(ide);
-                    request.setAttribute("vendedor", v);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
+                    Usuarios u = usuarioDAO.listarId(ide);
+                    request.setAttribute("usuario", u);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
                     break;
                 case "Actualizar":
-                    String dni1 = request.getParameter("txtdni");
-                    String nombre1 = request.getParameter("txtnombres");
-                    String fecha1 = request.getParameter("txtfecha");
-                    String salario1 = request.getParameter("txtsalario");
-                    double salarioDouble1 = 0.0;
-                    try {
-                        salarioDouble1 = Double.parseDouble(salario1);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
-                    String estado1 = request.getParameter("txtestado");
                     String usuario1 = request.getParameter("txtusuario");
-                    vende.setDNI(dni1);
-                    vende.setNOMBRE_VENDEDOR(nombre1);
-                    vende.setFECHA_CONTRATO(fecha1);
-                    vende.setSALARIO(salarioDouble1);
-                    vende.setESTADO_VENDEDOR(estado1);
-                    vende.setUSUARIO(usuario1);
-                    vende.setID_VENDEDOR(ide);
-                    vendedorDAO.actualizar(vende);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
+                    String contra1 = request.getParameter("txtcontra");
+                    String perfiles1 = request.getParameter("txtperfil");
+                    String nivel1 = request.getParameter("txtnivel");
+                    String otros1 = request.getParameter("txtotros");
+                    usua.setusuario(usuario1);
+                    usua.setcontra(contra1);
+                    usua.setperfil(perfiles1);
+                    usua.setnivel(nivel1);
+                    usua.setotros(otros1);
+                    usua.setid_user(ide);
+                    usuarioDAO.actualizar(usua);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
                     break;
                 case "Delete":
                     ide = Integer.parseInt(request.getParameter("id"));
-                    vendedorDAO.eliminar(ide);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
+                    usuarioDAO.eliminar(ide);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
                     break;
                 default:
                     throw new AssertionError();
             }
 
-            request.getRequestDispatcher("Vendedores.jsp").forward(request, response);
+            request.getRequestDispatcher("Usuarios.jsp").forward(request, response);
         }
-        if (menu.equals("Reportes")) {
+        if (menu.equals("Especificaciones")) {
             switch (accion) {
-                case "reporte":
-                    List<Empleado> lista = vendedorDAO.listar();
-                    request.setAttribute("vendedores", lista);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteExcel.jsp").forward(request, response);
-
-        }
-        if (menu.equals("Proveedores")) {
-            switch (accion) {
-                case "BuscarProveedor":
-                    String RUC = request.getParameter("codigoproveedor");
-                    if (RUC != null && !RUC.isEmpty()) {
-                        List<Proveedor> lista = new ArrayList<>();
-                        Proveedor prove = proveedorDAO.buscar(RUC);
-                        if (prove != null) {
-                            lista.add(prove);
+                /*case "BuscarUsuario":
+                    String perfil = request.getParameter("perfil");
+                    if (perfil != null && !perfil.isEmpty()) {
+                        List<Usuarios> lista = new ArrayList<>();
+                       Usuarios usua = usuarioDAO.buscar(perfil);
+                        if (usua != null) {
+                            lista.add(usua);
                         }
-                        request.setAttribute("proveedores", lista);
+                        request.setAttribute("usuarios", lista);
                     } else {
                         // Si el campo de búsqueda está vacío, muestra todos los proveedores.
-                        List<Proveedor> lista = proveedorDAO.listar();
-                        request.setAttribute("proveedores", lista);
+                        List<Usuarios> lista = usuarioDAO.listar();
+                        request.setAttribute("usuarios", lista);
                     }
-                    break;
+                    break;*/
                 case "Read":
-                    List<Proveedor> lista = proveedorDAO.listar();
-                    request.setAttribute("proveedores", lista);
+                    List<Especificaciones> lista = especificacionDAO.listar();
+                    request.setAttribute("especificaciones", lista);
                     break;
                 case "Agregar":
-                    String nombre = request.getParameter("txtnombre");
-                    String ruc = request.getParameter("txtruc");
-                    String estado = request.getParameter("txtestado");
-                    prove.setNOM_PROVEEDOR(nombre);
-                    prove.setRUC(ruc);
-                    prove.setESTADO_PROVEEDOR(estado);
-                    proveedorDAO.agregar(prove);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Proveedores&accion=Read").forward(request, response);
-                    break;
-                case "Update":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    Proveedor p = proveedorDAO.listarId(ide);
-                    request.setAttribute("proveedor", p);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Proveedores&accion=Read").forward(request, response);
-                    break;
-                case "Actualizar":
-                    String nombre1 = request.getParameter("txtnombre");
-                    String ruc1 = request.getParameter("txtruc");
-                    String estado1 = request.getParameter("txtestado");
-                    prove.setNOM_PROVEEDOR(nombre1);
-                    prove.setRUC(ruc1);
-                    prove.setESTADO_PROVEEDOR(estado1);
-                    prove.setID_PROVEEDOR(ide);
-                    proveedorDAO.actualizar(prove);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Proveedores&accion=Read").forward(request, response);
-                    break;
-                case "Delete":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    proveedorDAO.eliminar(ide);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Proveedores&accion=Read").forward(request, response);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("Proveedores.jsp").forward(request, response);
-
-        }
-        if (menu.equals("ReportesProveedores")) {
-            switch (accion) {
-                case "reporteproveedor":
-                    List<Proveedor> lista = proveedorDAO.listar();
-                    request.setAttribute("proveedores", lista);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteProveedores.jsp").forward(request, response);
-
-        }
-        if (menu.equals("Clientes")) {
-            switch (accion) {
-                case "BuscarCliente":
-                    String DNI = request.getParameter("codigocliente");
-                    if (DNI != null && !DNI.isEmpty()) {
-                        List<Cliente> lista = new ArrayList<>();
-                        Cliente cli = clienteDAO.buscar(DNI);
-                        if (cli != null) {
-                            lista.add(cli);
-                        }
-                        request.setAttribute("clientes", lista);
-                    } else {
-                        // Si el campo de búsqueda está vacío, muestra todos los clientes
-                        List<Cliente> lista = clienteDAO.listar();
-                        request.setAttribute("clientes", lista);
-                    }
-                    break;
-                case "Read":
-                    List<Cliente> lista = clienteDAO.listar();
-                    request.setAttribute("clientes", lista);
-                    break;
-                case "Agregar":
-                    String dni = request.getParameter("txtdni");
-                    String nombre = request.getParameter("txtnombre");
-                    String record = request.getParameter("txtrecord");
-                    int recordInt = 0;
+                    String titulo = request.getParameter("txttitulo");
+                    String descripcion = request.getParameter("txtdescripcion");
+                    String producto = request.getParameter("txtproducto");
+                    int productoInt = 0;
                     try {
-                        recordInt = Integer.parseInt(record);
+                        productoInt = Integer.parseInt(producto);
                     } catch (NumberFormatException e) {
                         // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
                         // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
                     }
-                    String fecha = request.getParameter("txtfecha");
-                    String estado = request.getParameter("txtestado");
-                    cli.setDNI(dni);
-                    cli.setNOMBRE_CLIENTE(nombre);
-                    cli.setRECORD_COMPRA(recordInt);
-                    cli.setFECHA_NACIMIENTO(fecha);
-                    cli.setESTADO_CLIENTE(estado);
-                    clienteDAO.agregar(cli);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes&accion=Read").forward(request, response);
+                    espe.settitulo(titulo);
+                    espe.setdescripcion(descripcion);
+                    espe.setid_prod(productoInt);
+                    especificacionDAO.agregar(espe);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Especificaciones&accion=Read").forward(request, response);
                     break;
                 case "Update":
                     ide = Integer.parseInt(request.getParameter("id"));
-                    Cliente c = clienteDAO.listarId(ide);
-                    request.setAttribute("cliente", c);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes&accion=Read").forward(request, response);
+                    Especificaciones es = especificacionDAO.listarId(ide);
+                    request.setAttribute("especificacion", es);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Especificaciones&accion=Read").forward(request, response);
                     break;
                 case "Actualizar":
-                    String dni1 = request.getParameter("txtdni");
-                    String nombre1 = request.getParameter("txtnombre");
-                    String record1 = request.getParameter("txtrecord");
-                    int recordInt1 = 0;
+                    String titulo1 = request.getParameter("txttitulo");
+                    String descripcion1 = request.getParameter("txtdescripcion");
+                    String producto1 = request.getParameter("txtproducto");
+                    int productoInt1 = 0;
                     try {
-                        recordInt1 = Integer.parseInt(record1);
+                        productoInt1 = Integer.parseInt(producto1);
                     } catch (NumberFormatException e) {
                         // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
                         // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
                     }
-                    String fecha1 = request.getParameter("txtfecha");
-                    String estado1 = request.getParameter("txtestado");
-                    cli.setDNI(dni1);
-                    cli.setNOMBRE_CLIENTE(nombre1);
-                    cli.setRECORD_COMPRA(recordInt1);
-                    cli.setFECHA_NACIMIENTO(fecha1);
-                    cli.setESTADO_CLIENTE(estado1);
-                    cli.setID_CLIENTE(ide);
-                    clienteDAO.actualizar(cli);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes&accion=Read").forward(request, response);
+                    espe.settitulo(titulo1);
+                    espe.setdescripcion(descripcion1);
+                    espe.setid_prod(productoInt1);
+                    espe.setid_esp(ide);
+                    especificacionDAO.actualizar(espe);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Especificaciones&accion=Read").forward(request, response);
                     break;
                 case "Delete":
                     ide = Integer.parseInt(request.getParameter("id"));
-                    clienteDAO.eliminar(ide);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes&accion=Read").forward(request, response);
+                    especificacionDAO.eliminar(ide);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Especificaciones&accion=Read").forward(request, response);
                     break;
                 default:
                     throw new AssertionError();
             }
-            request.getRequestDispatcher("Clientes.jsp").forward(request, response);
 
+            request.getRequestDispatcher("Especificaciones.jsp").forward(request, response);
         }
-        if (menu.equals("ReportesClientes")) {
-            switch (accion) {
-                case "reportecliente":
-                    List<Cliente> lista = clienteDAO.listar();
-                    request.setAttribute("clientes", lista);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteClientes.jsp").forward(request, response);
-        }
+        
+         
         if (menu.equals("Categorias")) {
             switch (accion) {
                 case "Read":
@@ -418,17 +282,7 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("Categorias.jsp").forward(request, response);
 
         }
-        if (menu.equals("ReportesCategorias")) {
-            switch (accion) {
-                case "reportecategoria":
-                    List<Categoria> lista = categoriaDAO.listar();
-                    request.setAttribute("categorias", lista);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteCategorias.jsp").forward(request, response);
-        }
+        
         if (menu.equals("Productos")) {
             switch (accion) {
                 case "Read":
@@ -583,226 +437,7 @@ public class Controlador_tabla extends HttpServlet {
             }
             request.getRequestDispatcher("reporteProductos.jsp").forward(request, response);
         }
-        if (menu.equals("Telefonos")) {
-            switch (accion) {
-                case "Read":
-                    List<Telefono> lista = telefonoDAO.listar();
-                    List<Cliente> clientes = clienteDAO.obtenerTodosLosClientes();
-                    request.setAttribute("clientes", clientes);
-                    request.setAttribute("telefonos", lista);
-                    break;
-                case "Agregar":
-                    String telefono_1 = request.getParameter("txttelefono1");
-                    String telefono_2 = request.getParameter("txttelefono2");
-                    String tel_cliente = request.getParameter("txt_telcliente");
-                    int tel_clienteInt = 0;
-                    try {
-                        tel_clienteInt = Integer.parseInt(tel_cliente);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
-                    tel.setTELEFONO_1(telefono_1);
-                    tel.setTELEFONO_2(telefono_2);
-                    tel.setID_CLIENTE(tel_clienteInt);
-                    telefonoDAO.agregar(tel);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Telefonos&accion=Read").forward(request, response);
-                    break;
-                case "Update":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    Telefono te = telefonoDAO.listarId(ide);
-                    request.setAttribute("telefono", te);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Telefonos&accion=Read").forward(request, response);
-                    break;
-                case "Actualizar":
-                    String telefono1_1 = request.getParameter("txttelefono1");
-                    String telefono2_2 = request.getParameter("txttelefono2");
-                    String tel_cliente1 = request.getParameter("txt_telcliente");
-                    int tel_clienteInt1 = 0;
-                    try {
-                        tel_clienteInt1 = Integer.parseInt(tel_cliente1);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
-                    tel.setTELEFONO_1(telefono1_1);
-                    tel.setTELEFONO_2(telefono2_2);
-                    tel.setID_CLIENTE(tel_clienteInt1);
-                    tel.setID_TELEFONO(ide);
-                    telefonoDAO.actualizar(tel);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Telefonos&accion=Read").forward(request, response);
-                    break;
-                case "Delete":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    telefonoDAO.eliminar(ide);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Telefonos&accion=Read").forward(request, response);
-                    break;
-
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("Telefonos.jsp").forward(request, response);
-
-        }
-        if (menu.equals("ReportesTelefonos")) {
-            switch (accion) {
-                case "reportetelefono":
-                    List<Telefono> listaTelefonos = telefonoDAO.listar();
-                    List<Cliente> listaClientes = clienteDAO.listar(); // Obtener lista de categorías
-                    // Obtener lista de proveedores
-                    request.setAttribute("telefonos", listaTelefonos);
-                    request.setAttribute("clientes", listaClientes);
-
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteTelefonos.jsp").forward(request, response);
-        }
-        if (menu.equals("Direcciones")) {
-            switch (accion) {
-                case "Read":
-                    List<Direccion> lista = direccionDAO.listar();
-                    request.setAttribute("direcciones", lista);
-                    break;
-                case "Agregar":
-                    String calle = request.getParameter("txtcalle");
-                    String distrito = request.getParameter("txtdistrito");
-                    String ciudad = request.getParameter("txtciudad");
-                    dir.setCALLE(calle);
-                    dir.setDISTRITO(distrito);
-                    dir.setCIUDAD(ciudad);
-                    direccionDAO.agregar(dir);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Direcciones&accion=Read").forward(request, response);
-                    break;
-                case "Update":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    Direccion d = direccionDAO.listarId(ide);
-                    request.setAttribute("direccion", d);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Direcciones&accion=Read").forward(request, response);
-                    break;
-                case "Actualizar":
-                    String calle1 = request.getParameter("txtcalle");
-                    String distrito1 = request.getParameter("txtdistrito");
-                    String ciudad1 = request.getParameter("txtciudad");
-                    dir.setCALLE(calle1);
-                    dir.setDISTRITO(distrito1);
-                    dir.setCIUDAD(ciudad1);
-                    dir.setID_DIRECCION(ide);
-                    direccionDAO.actualizar(dir);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Direcciones&accion=Read").forward(request, response);
-                    break;
-                case "Delete":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    direccionDAO.eliminar(ide);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Direcciones&accion=Read").forward(request, response);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("Direcciones.jsp").forward(request, response);
-
-        }
-        if (menu.equals("ReportesDirecciones")) {
-            switch (accion) {
-                case "reportedireccion":
-                    List<Direccion> lista = direccionDAO.listar();
-                    request.setAttribute("direcciones", lista);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteDirecciones.jsp").forward(request, response);
-
-        }
-        if (menu.equals("Clientes_direcciones")) {
-            switch (accion) {
-                case "Read":
-                    List<Cliente_direccion> lista = cliente_direccionDAO.listar();
-                    List<Direccion> direcciones = direccionDAO.obtenerTodasLasDirecciones();
-                    List<Cliente> clientes = clienteDAO.obtenerTodosLosClientes();
-                    request.setAttribute("clientes", clientes);
-                    request.setAttribute("direcciones", direcciones);
-                    request.setAttribute("clientes_direcciones", lista);
-                    break;
-                case "Agregar":
-                    String cliente = request.getParameter("txtcliente");
-                    String direccion = request.getParameter("txtdireccion");
-                    int clienteInt = 0;
-                    try {
-                        clienteInt = Integer.parseInt(cliente);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
-                    int direccionInt = 0;
-                    try {
-                        direccionInt = Integer.parseInt(direccion);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
-                    cli_dir.setID_CLIENTE(clienteInt);
-                    cli_dir.setID_DIRECCION(direccionInt);
-                    cliente_direccionDAO.agregar(cli_dir);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes_direcciones&accion=Read").forward(request, response);
-                    break;
-                case "Update":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    Cliente_direccion clie_dire = cliente_direccionDAO.listarId(ide);
-                    request.setAttribute("cliente_direccion", clie_dire);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes_direcciones&accion=Read").forward(request, response);
-                    break;
-                case "Actualizar":
-                    String cliente1 = request.getParameter("txtcliente");
-                    String direccion1 = request.getParameter("txtdireccion");
-                    int clienteInt1 = 0;
-                    try {
-                        clienteInt1 = Integer.parseInt(cliente1);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
-                    int direccionInt1 = 0;
-                    try {
-                        direccionInt1 = Integer.parseInt(direccion1);
-                    } catch (NumberFormatException e) {
-                        // Manejo de error: Aquí puedes mostrar un mensaje de error o realizar alguna otra acción en caso de que la conversión falle.
-                        // También puedes establecer un valor predeterminado o enviar una respuesta al usuario.
-                    }
-                    cli_dir.setID_CLIENTE(clienteInt1);
-                    cli_dir.setID_DIRECCION(direccionInt1);
-                    cli_dir.setID_CLIENTE_DIRECCION(ide);
-                    cliente_direccionDAO.actualizar(cli_dir);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes_direcciones&accion=Read").forward(request, response);
-                    break;
-                case "Delete":
-                    ide = Integer.parseInt(request.getParameter("id"));
-                    cliente_direccionDAO.eliminar(ide);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Clientes_direcciones&accion=Read").forward(request, response);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("Clientes_direcciones.jsp").forward(request, response);
-
-        }
-        if (menu.equals("ReportesDirecciones_Clientes")) {
-            switch (accion) {
-                case "reportedireccion_cliente":
-                    List<Cliente_direccion> listacliente_dir = cliente_direccionDAO.listar();
-                    List<Cliente> listaClientes = clienteDAO.listar();
-                    List<Direccion> listaDirecciones = direccionDAO.listar();// Obtener lista de categorías
-                    // Obtener lista de proveedores
-                    request.setAttribute("clientes_direcciones", listacliente_dir);
-                    request.setAttribute("clientes", listaClientes);
-                    request.setAttribute("direcciones", listaDirecciones);
-                    break;
-                default:
-                    throw new AssertionError();
-            }
-            request.getRequestDispatcher("reporteDirecciones_Clientes.jsp").forward(request, response);
-        }
+         
         if (menu.equals("Ventas")) {
             switch (accion) {
                 case "Read":
