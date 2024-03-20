@@ -315,7 +315,6 @@ public class Controlador_tabla extends HttpServlet {
         //-----------------------
         
         //----------------------------------------CATEGORIA
->>>>>>> 2b44fc1ce7a6f101663b287dc91809e5188a4ceb
         if (menu.equals("Categorias")) {
             switch (accion) {
                 case "Read":
@@ -370,8 +369,6 @@ public class Controlador_tabla extends HttpServlet {
             }
             request.getRequestDispatcher("reporteCategorias.jsp").forward(request, response);
         }
-<<<<<<< HEAD
-=======
         //-----------------------
         //----------------------------------------SUBCATEGORIA
         if (menu.equals("subCategorias")) {
@@ -431,7 +428,7 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("reporteSubCategorias.jsp").forward(request, response);
         }
         //-----------------------
->>>>>>> 2b44fc1ce7a6f101663b287dc91809e5188a4ceb
+
         
         if (menu.equals("Productos")) {
             switch (accion) {
