@@ -1,7 +1,7 @@
 package Controlador;
 
-import Modelo.Empleado;
-import ModeloDAO.EmpleadoDAO;
+import Modelo.Usuarios;
+import ModeloDAO.UsuariosDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class Validar extends HttpServlet {
 
-    EmpleadoDAO edao = new EmpleadoDAO();
-    Empleado em = new Empleado();
+    UsuariosDAO udao = new UsuariosDAO();
+    Usuarios us = new Usuarios();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,9 +46,9 @@ public class Validar extends HttpServlet {
         if (accion.equalsIgnoreCase("Ingresar")) {
             String user = request.getParameter("txtuser");
             String pass = request.getParameter("txtpass");
-            em = edao.validar(user, pass);
-            if (em.getUSUARIO() != null) {
-                request.setAttribute("usuario", em);
+            us = udao.validar(user, pass);
+            if (us.getusuario() != null) {
+                request.setAttribute("usuario", us);
                 request.getRequestDispatcher("Controlador_tabla?menu=Principal").forward(request, response);
             } else {
                 request.getRequestDispatcher("index.jsp").forward(request, response);
