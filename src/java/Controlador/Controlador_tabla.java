@@ -374,7 +374,7 @@ public class Controlador_tabla extends HttpServlet {
         if (menu.equals("subCategorias")) {
             switch (accion) {
                 case "Read":
-                    List<Categoria> lista = subCateDAO.listar();
+                    List<SubCategoria> lista = subCateDAO.listar();
                     request.setAttribute("subcategoria", lista);
                     break;
                 case "Agregar":
