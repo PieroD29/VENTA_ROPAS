@@ -6,36 +6,18 @@ import Modelo.Clasificacion;
 import Modelo.Categoria;
 import Modelo.Usuarios;
 import Modelo.Especificaciones;
+import Modelo.Marca;
 import Modelo.SubCategoria;
-import Modelo.Cliente;
-<<<<<<< HEAD
 import Modelo.Productos;
-=======
-import Modelo.Cliente_direccion;
-import Modelo.Direccion;
-import Modelo.Empleado;
-import Modelo.Producto;
-import Modelo.Proveedor;
-import Modelo.Telefono;
->>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
 import Modelo.Venta;
 import ModeloDAO.BoletaDAO;
 import ModeloDAO.ClasificacionDAO;
 import ModeloDAO.CategoriaDAO;
 import ModeloDAO.UsuariosDAO;
 import ModeloDAO.EspecificacionesDAO;
+import ModeloDAO.MarcaDAO;
 import ModeloDAO.SubCategoriaDAO;
-<<<<<<< HEAD
 import ModeloDAO.ProductosDAO;
-=======
-import ModeloDAO.ClienteDAO;
-import ModeloDAO.Cliente_direccionDAO;
-import ModeloDAO.DireccionDAO;
-import ModeloDAO.EmpleadoDAO;
-import ModeloDAO.ProductoDAO;
-import ModeloDAO.ProveedorDAO;
-import ModeloDAO.TelefonoDAO;
->>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
 import ModeloDAO.VentaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -75,35 +57,17 @@ public class Controlador_tabla extends HttpServlet {
     Categoria cate = new Categoria();
     CategoriaDAO categoriaDAO = new CategoriaDAO();
 
-<<<<<<< HEAD
- 
-=======
->>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
 //--------------------------------------------------
     SubCategoria sbcate = new SubCategoria();
     SubCategoriaDAO subCateDAO = new SubCategoriaDAO();
     
 //--------------------------------------------------
-<<<<<<< HEAD
- 
- 
- 
-=======
-    Producto pro = new Producto();
-    ProductoDAO productoDAO = new ProductoDAO();
+    Productos pro = new Productos();
+    ProductosDAO productosDAO = new ProductosDAO();
 
 //--------------------------------------------------
-    Telefono tel = new Telefono();
-    TelefonoDAO telefonoDAO = new TelefonoDAO();
-
-//--------------------------------------------------
-    Direccion dir = new Direccion();
-    DireccionDAO direccionDAO = new DireccionDAO();
-
-//--------------------------------------------------
-    Cliente_direccion cli_dir = new Cliente_direccion();
-    Cliente_direccionDAO cliente_direccionDAO = new Cliente_direccionDAO();
->>>>>>> 189966c24b5810b2c66a04d28952645188232bd5
+    Marca mar = new Marca();
+    MarcaDAO marcaDAO = new MarcaDAO();
 
 //--------------------------------------------------
     Boleta bole = new Boleta();
@@ -871,6 +835,161 @@ public class Controlador_tabla extends HttpServlet {
             }
             request.getRequestDispatcher("reporteVentas.jsp").forward(request, response);
         }
+
+        if (menu.equals("Producto")) {
+            switch (accion) {
+                case "BuscarProducto":
+                    String prod = request.getParameter("COD_PRODUCTO");
+                    if (prod != null && !prod.isEmpty()) {
+                        List<Productos> listaP = new ArrayList<>();
+                       Productos productos = productoDAO.buscar((cod));
+                        if (productos != null) {
+                            listaP.add(productos);
+                        }
+                        request.setAttribute("listaprod", listaP);
+                    } else {
+                        // Si el campo de búsqueda está vacío, muestra todos los proveedores.
+                        List<Productos> listaP = productoDAO.listar();
+                        request.setAttribute("listaprod", listaP);
+                    }
+                    break;
+                case "Read":
+                    List<Productos> listaP = productoDAO.listar();
+                    request.setAttribute("listaprod", listaP);
+                    break;
+                case "Agregar":
+                    int id = Integer.parseInt(request.getParameter("txtidprod"));
+                    String nombre = request.getParameter("txtnomprod");
+                    String descripcion = request.getParameter("txtdescprod");
+                    double precio = Double.parseDouble(request.getParameter("txtpreprod"));
+                    String modelo = request.getParameter("txtmodprod");
+                    int stock = Integer.parseInt(request.getParameter("txtstockprod"));
+                    boolean estado = Boolean.parseBoolean(request.getParameter("txtestprod"));
+                    int clasif =  Integer.parseInt(request.getParameter("txtclasiprod"));
+                    int categoria = Integer.parseInt(request.getParameter("txtcatprod"));
+                    int subcateg = Integer.parseInt(request.getParameter("txtsubcprod"));
+                    int marca = Integer.parseInt(request.getParameter("txtmarcaprod"));
+
+
+                    pro.setID_PROD(id);
+                    pro.setNOMBRE_PROD(nombre);
+                    pro.setDESC_PROD(descripcion);
+                    pro.setPREC_PROD(precio);
+                    pro.setMODE_PROD(modelo);
+                    pro.setSTOCK_PROD(stock);
+                    pro.setESTADO_PROD(estado);
+                    pro.setID_CLASIFICACION(clasif);
+                    pro.setID_CATEGORIA(categoria);
+                    pro.setID_SUBCAT(subcateg);
+                    pro.setID_MARCA(marca);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Producto&accion=Read").forward(request, response);
+                    break;
+                case "Update":
+                    int cod1 = Integer.parseInt(request.getParameter("COD_PRODUCTO"));
+                    Productos p = productoDAO.buscar(cod1);
+                    request.setAttribute("producto", p);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Producto&accion=Read").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String nombre1 = request.getParameter("txtnomprod");
+                    String descripcion1 = request.getParameter("txtdescprod");
+                    double precio1 = Double.parseDouble(request.getParameter("txtpreprod"));
+                    String modelo1 = request.getParameter("txtmodprod");
+                    int stock1 = Integer.parseInt(request.getParameter("txtstockprod"));
+                    boolean estado1 = Boolean.parseBoolean(request.getParameter("txtestprod"));
+                    int clasif1 =  Integer.parseInt(request.getParameter("txtclasiprod"));
+                    int categoria1 = Integer.parseInt(request.getParameter("txtcatprod"));
+                    int subcateg1 = Integer.parseInt(request.getParameter("txtsubcprod"));
+                    int marca1 = Integer.parseInt(request.getParameter("txtmarcaprod"));
+
+                    int id1 = Integer.parseInt(request.getParameter("COD_PRODUCTO"));
+                    pro.setID_PROD(id1);
+                    pro.setNOMBRE_PROD(nombre1);
+                    pro.setDESC_PROD(descripcion1);
+                    pro.setPREC_PROD(precio1);
+                    pro.setMODE_PROD(modelo1);
+                    pro.setSTOCK_PROD(stock1);
+                    pro.setESTADO_PROD(estado1);
+                    pro.setID_CLASIFICACION(clasif1);
+                    pro.setID_CATEGORIA(categoria1);
+                    pro.setID_SUBCAT(subcateg1);
+                    pro.setID_MARCA(marca1);
+                    productoDAO.actualizar(pro);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Producto&accion=Read").forward(request, response);
+                    break;
+                case "Delete":
+                    int cod3 = Integer.parseInt(request.getParameter("COD_PRODUCTO"));
+                    productoDAO.eliminar(cod3);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Producto&accion=Read").forward(request, response);
+                    break;
+                default:
+                    throw new AssertionError();
+            }
+
+            request.getRequestDispatcher("Producto.jsp").forward(request, response);
+        }
+
+if (menu.equals("Marca")) {
+         switch (accion) {
+             case "BuscarMarca":
+                 String cod = request.getParameter("COD_MARCA");
+                 if (cod != null && !cod.isEmpty()) {
+                     List<Marca> listaM = new ArrayList<>();
+                    Marca marca = marcaDAO.buscar(Integer.parseInt(cod));
+                     if (marca != null) {
+                         listaM.add(marca);
+                     }
+                     request.setAttribute("listamarca", listaM);
+                 } else {
+                     // Si el campo de búsqueda está vacío, muestra todos los proveedores.
+                     List<Marca> listaM = marcaDAO.listar();
+                     request.setAttribute("listamarca", listaM);
+                 }
+                 break;
+             case "Read":
+                 List<Marca> listaM = marcaDAO.listar();
+                 request.setAttribute("listamarca", listaM);
+                 break;
+             case "Agregar":
+                 int id = Integer.parseInt(request.getParameter("txtidmarca"));
+                 String nombre = request.getParameter("txtnommarca");
+                 boolean estado = Boolean.parseBoolean(request.getParameter("txtestmarca"));
+
+
+                 mar.setID_MARCA(id);
+                 mar.setNOMBRE_MARCA(nombre);
+                 mar.setESTADO_MARCA(estado);
+                 request.getRequestDispatcher("Controlador_tabla?menu=Marca&accion=Read").forward(request, response);
+                 break;
+             case "Update":
+                 int cod1 = Integer.parseInt(request.getParameter("COD_MARCA"));
+                 Marca m = marcaDAO.buscar(cod1);
+                 request.setAttribute("marca", m);
+                 request.getRequestDispatcher("Controlador_tabla?menu=Marca&accion=Read").forward(request, response);
+                 break;
+             case "Actualizar":
+                 String nombre1 = request.getParameter("txtnommarca");
+                 boolean estado1 = Boolean.parseBoolean(request.getParameter("txtestmarca"));
+
+                 int id1 = Integer.parseInt(request.getParameter("COD_PRODUCTO"));
+                 mar.setNOMBRE_MARCA(nombre1);
+                 mar.setESTADO_MARCA(estado1);
+                 marcaDAO.actualizarnombre(id1, nombre1, estado1);
+                 request.getRequestDispatcher("Controlador_tabla?menu=Marca&accion=Read").forward(request, response);
+                 break;
+             case "Delete":
+                 int id3 = Integer.parseInt(request.getParameter("COD_PRODUCTO"));
+                 marcaDAO.eliminar(id3);
+                 request.getRequestDispatcher("Controlador_tabla?menu=Marca&accion=Read").forward(request, response);
+                 break;
+             default:
+                 throw new AssertionError();
+         }
+
+         request.getRequestDispatcher("Marca.jsp").forward(request, response);
+     } 
+
+}
 
     }
 
