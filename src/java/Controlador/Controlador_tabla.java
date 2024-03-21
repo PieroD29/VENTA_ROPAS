@@ -10,7 +10,7 @@ import Modelo.Especificaciones;
 import Modelo.SubCategoria; 
  
 import Modelo.Marca;
-import Modelo.SubCategoria;
+ 
  
 import Modelo.Productos;
 import Modelo.Venta;
