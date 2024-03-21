@@ -16,6 +16,7 @@
         <servlet-name>Validar</servlet-name>
         <url-pattern>/Validar</url-pattern>
     </servlet-mapping>
+   
     <session-config>
         <session-timeout>
             30

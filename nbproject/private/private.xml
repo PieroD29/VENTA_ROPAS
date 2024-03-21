@@ -2,13 +2,32 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/Controlador/Controlador_tabla.java</file>
-            <file>file:/D:/(IMPORTANTE)%20GITHUB%20CLONE/Inventario_p2/VENTA_ROPAS/src/java/ModeloDAO/SubCategoriaDAO.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/Modelo/Categoria.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/Telefonos.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/reporteUsuarios.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/Controlador/Controlador_tabla.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/Clientes_direcciones.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/reporteClientes.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/Clientes.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/reporteEspecificaciones.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/Modelo/Especificaciones.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/Productos.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/ModeloDAO/SubCategoriaDAO.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/Modelo/Productos.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/Modelo/Usuarios.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/Categorias.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/ModeloDAO/ProductosDAO.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/reporteDirecciones.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/Controlador/Validar.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/reporteProveedores.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/Usuarios.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/reporteCategorias.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/ModeloDAO/UsuariosDAO.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/ModeloDAO/CategoriaDAO.java</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/Especificaciones.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/web/reporteProductos.jsp</file>
+            <file>file:/C:/Users/HP%20SUPPORT/OneDrive%20-%20SENATI/CURSOS%20DE%20SENATI/SENATI%204TO%20SEMESTRE/INVENTARIO/VENTA_ROPAS/src/java/ModeloDAO/EspecificacionesDAO.java</file>
         </group>
->>>>>>> 2b44fc1ce7a6f101663b287dc91809e5188a4ceb
     </open-files>
 </project-private>
