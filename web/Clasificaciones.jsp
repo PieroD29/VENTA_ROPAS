@@ -88,7 +88,7 @@
                             <tr>
                                 <td>${clasi.getId_clas()}</td>
                                 <td>${clasi.getDescripcion()}</td>
-                                <td>${clasi.getImg_dir()}</td>
+                                <td><img src="${clasi.getImg_dir()}" heigth="50" width="50"></td>
                                 <td><a class="btn btn-warning" href="Controlador_tabla?menu=Clasificacion&accion=Update&id=${clasi.Id_clas}">Update</a></td>
                                 <td><a class="btn btn-danger" href="Controlador_tabla?menu=Clasificacion&accion=Delete&id=<c:out value='${clasi.Id_clas}' />">Delete</a></td>
                             </tr>
@@ -100,14 +100,17 @@
         <div class="form-container">
             <div class="card">
                 <div class="card-body">
-                    <form action="Controlador_tabla?menu=Clasificacion" action="Controlador_tabla?menu=ReportesClasificaciones" method="POST">
+                    <form action="Controlador_tabla?menu=Clasificaciones&accion=Guardar" class="col-md-6" action="Controlador_tabla?menu=ReportesClasificaciones" method="POST">
                         <div class="form-group">
                             <label>DESCRIPCION_CLASIFICACION</label>
-                            <input type="text" value="${clasificaion.descripcion}" name="txtdescripcion" class="form-control">
+                            <input type="text" value="${clasificacion.descripcion}" name="txtdescripcion" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>IMAGEN</label>
-                            <input type="text" value="${clasificacion.img_dir}" name="txtdir_imagen" class="form-control">
+                            <input type="file" value="${clasificacion.img_dir}" name="txtdir_imagen">
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-outline-primary" name="accion">Guardar Imagen</button>
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
