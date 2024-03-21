@@ -4,20 +4,16 @@ import Config.GenerarSerie;
 import Modelo.Boleta;
 import Modelo.Clasificacion;
 import Modelo.Categoria;
-import Modelo.Usuarios;
+import Modelo.Empleado;
 import Modelo.Especificaciones;
- 
 import Modelo.SubCategoria; 
- 
 import Modelo.Marca;
- 
- 
 import Modelo.Productos;
 import Modelo.Venta;
 import ModeloDAO.BoletaDAO;
 import ModeloDAO.ClasificacionDAO;
 import ModeloDAO.CategoriaDAO;
-import ModeloDAO.UsuariosDAO;
+import ModeloDAO.EmpleadoDAO;
 import ModeloDAO.EspecificacionesDAO;
 import ModeloDAO.MarcaDAO;
 import ModeloDAO.SubCategoriaDAO;
@@ -33,13 +29,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload2.core.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileItemFactory;
+
+ 
+ 
 
 @WebServlet(name = "Controlador_tabla", urlPatterns = {"/Controlador_tabla"})
 public class Controlador_tabla extends HttpServlet {
 
     //RequestDispatcher dispatcher = null;
-    Usuarios usua = new Usuarios();
-    UsuariosDAO usuarioDAO = new UsuariosDAO();
+    Empleado vende = new Empleado();
+    EmpleadoDAO vendedorDAO = new EmpleadoDAO();
     int ide;
     
 //--------------------------------------------------
@@ -103,26 +104,26 @@ public class Controlador_tabla extends HttpServlet {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
         }
 
-        if (menu.equals("Usuarios")) {
+        if (menu.equals("Vendedores")) {
             switch (accion) {
-                case "BuscarUsuario":
-                    String perfil = request.getParameter("perfil");
+                case "BuscarEmpleado":
+                    String perfil = request.getParameter("codigoempleado");
                     if (perfil != null && !perfil.isEmpty()) {
-                        List<Usuarios> lista = new ArrayList<>();
-                       Usuarios usua = usuarioDAO.buscar(perfil);
-                        if (usua != null) {
-                            lista.add(usua);
+                        List<Empleado> lista = new ArrayList<>();
+                        Empleado vende = vendedorDAO.buscar(perfil);
+                        if (vende != null) {
+                            lista.add(vende);
                         }
-                        request.setAttribute("usuarios", lista);
+                        request.setAttribute("vendedores", lista);
                     } else {
                         // Si el campo de búsqueda está vacío, muestra todos los proveedores.
-                        List<Usuarios> lista = usuarioDAO.listar();
-                        request.setAttribute("usuarios", lista);
+                        List<Empleado> lista = vendedorDAO.listar();
+                        request.setAttribute("vendedores", lista);
                     }
                     break;
                 case "Read":
-                    List<Usuarios> lista = usuarioDAO.listar();
-                    request.setAttribute("usuarios", lista);
+                    List<Empleado> lista = vendedorDAO.listar();
+                    request.setAttribute("vendedores", lista);
                     break;
                 case "Agregar":
                     String usuario = request.getParameter("txtusuario");
@@ -130,19 +131,19 @@ public class Controlador_tabla extends HttpServlet {
                     String perfiles = request.getParameter("txtperfil");
                     String nivel = request.getParameter("txtnivel");
                     String otros = request.getParameter("txtotros");
-                    usua.setusuario(usuario);
-                    usua.setcontra(contra);
-                    usua.setperfil(perfiles);
-                    usua.setnivel(nivel);
-                    usua.setotros(otros);
-                    usuarioDAO.agregar(usua);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
+                    vende.setusuario(usuario);
+                    vende.setcontra(contra);
+                    vende.setperfil(perfiles);
+                    vende.setnivel(nivel);
+                    vende.setotros(otros);
+                    vendedorDAO.agregar(vende);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
                     break;
                 case "Update":
                     ide = Integer.parseInt(request.getParameter("id"));
-                    Usuarios u = usuarioDAO.listarId(ide);
-                    request.setAttribute("usuario", u);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
+                    Empleado v = vendedorDAO.listarId(ide);
+                    request.setAttribute("vendedor", v);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
                     break;
                 case "Actualizar":
                     String usuario1 = request.getParameter("txtusuario");
@@ -150,31 +151,31 @@ public class Controlador_tabla extends HttpServlet {
                     String perfiles1 = request.getParameter("txtperfil");
                     String nivel1 = request.getParameter("txtnivel");
                     String otros1 = request.getParameter("txtotros");
-                    usua.setusuario(usuario1);
-                    usua.setcontra(contra1);
-                    usua.setperfil(perfiles1);
-                    usua.setnivel(nivel1);
-                    usua.setotros(otros1);
-                    usua.setid_user(ide);
-                    usuarioDAO.actualizar(usua);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
+                    vende.setusuario(usuario1);
+                    vende.setcontra(contra1);
+                    vende.setperfil(perfiles1);
+                    vende.setnivel(nivel1);
+                    vende.setotros(otros1);
+                    vende.setid_user(ide);
+                    vendedorDAO.actualizar(vende);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
                     break;
                 case "Delete":
                     ide = Integer.parseInt(request.getParameter("id"));
-                    usuarioDAO.eliminar(ide);
-                    request.getRequestDispatcher("Controlador_tabla?menu=Usuarios&accion=Read").forward(request, response);
+                    vendedorDAO.eliminar(ide);
+                    request.getRequestDispatcher("Controlador_tabla?menu=Vendedores&accion=Read").forward(request, response);
                     break;
                 default:
                     throw new AssertionError();
             }
 
-            request.getRequestDispatcher("Usuarios.jsp").forward(request, response);
+            request.getRequestDispatcher("Vendedores.jsp").forward(request, response);
         }
         if (menu.equals("ReportesUsuarios")) {
             switch (accion) {
                 case "reporteusuario":
-                    List<Usuarios> lista = usuarioDAO.listar();
-                    request.setAttribute("usuarios", lista);
+                    List<Empleado> lista = vendedorDAO.listar();
+                    request.setAttribute("vendedores", lista);
                     break;
                 default:
                     throw new AssertionError();
@@ -275,9 +276,31 @@ public class Controlador_tabla extends HttpServlet {
         //----------------------------------------CLASIFICACION
         if (menu.equals("Clasificacion")) {
             switch (accion) {
+                case "Guardar":
+                    ArrayList<String> lista = new ArrayList<>();
+                    try{
+                        FileItemFactory file = new DiskFileItemFactory();
+                        ServletFileUpload file = new ServletFileUpload(file);
+                        List items = fileUpload.parseRequest(request);
+                        for(int i=0, i<items.size(), i++){
+                            FileItem fileItem=(FileItem)items.get(i);
+                            if(fileItem.isFormField()){
+                                File f = new File("C:\\xampp\\htdocs\\img\\"+fileItem.getName());
+                                fileItem.write(f);
+                                clasi.setImg_dir("http://localhost/img/"+fileItem.getName());    
+                            }else{
+                                lista.add(fileItem.getString());
+                            }
+                        }
+                        clasi.setDescripcion(lista.get(0));
+                    } catch (Exception e){
+                    
+                    }
+                    request.getRequestDispatcher("Controlador_tabla?accion=Read.jsp").forward(request,response);
+                    break;
                 case "Read":
-                    List<Clasificacion> lista = clasificacionDAO.listar();
-                    request.setAttribute("clasificacion", lista);
+                    List<Clasificacion> clasificacion= clasificacionDAO.listar();
+                    request.setAttribute("clasificaciones", clasificacion);
                     break;
                 case "Agregar":
                     String id_clas = request.getParameter("txtnombre");
@@ -300,7 +323,6 @@ public class Controlador_tabla extends HttpServlet {
                 case "Actualizar":
                     String descripcion1 = request.getParameter("txtdescripcion");
                     String img_dir1 = request.getParameter("txtestado");
-                    
                     clasi.setDescripcion(descripcion1);
                     clasi.setImg_dir(img_dir1);
                     clasi.setId_clas(ide);
