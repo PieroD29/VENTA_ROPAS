@@ -36,14 +36,15 @@ public class MarcaDAO {
         return mar;
     }
     
-    public int actualizarnombre(int id, String nombre) {
-        String sql = "UPDATE MARCA SET NOMBRE = ? WHERE ID_MARCA = ?";
+    public int actualizarnombre(int id, String nombre, boolean estado) {
+        String sql = "UPDATE MARCA SET NOMBRE = ?, ESTADO = ? WHERE ID_MARCA = ?";
         
         try{
             conexion = conn.getConnection();
             ps = conexion.prepareStatement(sql);
             ps.setString(1, nombre);
-            ps.setInt(2, id);
+            ps.setBoolean(2,estado);
+            ps.setInt(3, id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
