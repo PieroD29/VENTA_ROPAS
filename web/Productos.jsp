@@ -88,40 +88,35 @@
                             <th>NOMBRE </th>
                             <th>DESCRIPCION</th>
                             <th>PRECIO</th>
+                            <th>MODELO</th>
                             <th>STOCK</th>
                             <th>ESTADO</th>
-                            <th>PROVEEDOR</th>
+                            <th>CLASIFICACION</th>
                             <th>CATEGORIA</th>
-                            <th>ACCIONES</th>
+                            <th>SUBCATEGORIA</th>
+                            <th>MARCA</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="pro" items="${productos}">
+                        <c:forEach var="pro" items="${listaprod}">
                             <tr>
-                                <td> ${pro.getCOD_PRODUCTO()} </td>
-                                <td> ${pro.getNOMBRE_PRODUCTO()} </td>
-                                <td> ${pro.getDESCRIPCION()} </td>
-                                <td> ${pro.getPRECIO_UNITARIO()} </td>
-                                <td> ${pro.getSTOCK()} </td>
-                                <td> ${pro.isESTADO()} </td>
-                                <td>
-                                    <c:forEach var="proveedor" items="${proveedores}">
-                                        <c:if test="${proveedor.ID_PROVEEDOR == pro.ID_PROVEEDOR}">
-                                            ${proveedor.NOM_PROVEEDOR}
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
-                                <td>
-                                    <c:forEach var="categoria" items="${categorias}">
-                                        <c:if test="${categoria.ID_CATEGORIA == pro.ID_CATEGORIA}">
-                                            ${categoria.NOMBRE_CATEGORIA}
-                                        </c:if>
-                                    </c:forEach>
-                                </td>
+                                <td> ${pro.getID_PROD()} </td>
+                                <td> ${pro.getNOMBRE_PROD()} </td>
+                                <td> ${pro.getDESC_PROD()} </td>
+                                <td> ${pro.getPREC_PROD()} </td>
+                                <td> ${pro.getMODE_PROD()} </td>
+                                <td> ${pro.getSTOCK_PROD()} </td>
+                                <td> ${pro.isESTADO_PROD()} </td>
+                                <td> ${pro.getID_CLASIFICACION()} </td>
+                                <td> ${pro.getID_CATEGORIA()} </td>
+                                <td> ${pro.getID_SUBCAT()} </td>
+                                <td> ${pro.getID_MARCA()} </td>
                                 <td><a class="btn btn-warning"
-                                       href="Controlador_tabla?menu=Productos&accion=Update&id=${pro.COD_PRODUCTO}">Update</a></td>
+                                       href="Controlador_tabla?menu=Producto&accion=Update&id=${pro.ID_PROD}">Update</a></td>
                                 <td><a class="btn btn-danger"
-                                       href="Controlador_tabla?menu=Productos&accion=Delete&id=${pro.COD_PRODUCTO}">Delete</a></td>
+                                       href="Controlador_tabla?menu=Producto&accion=Delete&id=${pro.ID_PROD}">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -133,56 +128,48 @@
                 <div class="card-body">
                     <form action="Controlador_tabla?menu=Productos" action="Controlador_tabla?menu=ReportesProductos" method="POST">
                         <div class="form-group">
-                            <label>NOMBRE_PRODUCTO</label>
-                            <input type="text" value="${producto.NOMBRE_PRODUCTO}" name="txtnombre" class="form-control">
+                            <label>ID</label>
+                            <input type="text" value="${producto.ID_PROD}" name="txtnombre" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>NOMBRE</label>
+                            <input type="text" value="${producto.NOMBRE_PROD}" name="txtdescripcion" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>DESCRIPCION</label>
-                            <input type="text" value="${producto.DESCRIPCION}" name="txtdescripcion" class="form-control">
+                            <input type="text" value="${producto.DESC_PROD}" name="txtprecio" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>PRECIO</label>
-                            <input type="text" value="${producto.PRECIO_UNITARIO}" name="txtprecio" class="form-control">
+                            <input type="text" value="${producto.PREC_PROD}" name="txtstock" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>MODELO</label>
+                            <input type="text" value="${producto.MODE_PROD}" name="txtestado" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>STOCK</label>
-                            <input type="text" value="${producto.STOCK}" name="txtstock" class="form-control">
+                            <input type="text" value="${producto.STOCK_PROD}" name="txtnombre" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>ESTADO</label>
-                            <input type="text" value="${producto.ESTADO}" name="txtestado" class="form-control">
+                            <input type="text" value="${producto.ESTADO_PROD}" name="txtdescripcion" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>ID_PROVEEDOR</label>
-                            <select name="txtproveedor" class="form-control">
-                                <option value="">Seleccione un proveedor</option>
-                                <c:forEach var="proveedor" items="${proveedores}">
-                                    <c:choose>
-                                        <c:when test="${proveedor.ID_PROVEEDOR == producto.ID_PROVEEDOR}">
-                                            <option value="${proveedor.ID_PROVEEDOR}" selected>${proveedor.NOM_PROVEEDOR}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${proveedor.ID_PROVEEDOR}">${proveedor.NOM_PROVEEDOR}</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            </select>
+                            <label>CLASIFICACION</label>
+                            <input type="text" value="${producto.ID_CLASIFICACION}" name="txtprecio" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>ID_CATEGORIA</label>
-                            <select name="txtcategoria" class="form-control">
-                                <option value="">Seleccione una categoría</option>
-                                <c:forEach var="categoria" items="${categorias}">
-                                    <c:choose>
-                                        <c:when test="${categoria.ID_CATEGORIA == producto.ID_CATEGORIA}">
-                                            <option value="${categoria.ID_CATEGORIA}" selected>${categoria.NOMBRE_CATEGORIA}</option>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <option value="${categoria.ID_CATEGORIA}">${categoria.NOMBRE_CATEGORIA}</option>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            </select>
+                            <label>CATEGORIA</label>
+                            <input type="text" value="${producto.ID_CATEGORIA}" name="txtstock" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>SUBCATEGORIA</label>
+                            <input type="text" value="${producto.ID_SUBCAT}" name="txtestado" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>MARCA</label>
+                            <input type="text" value="${producto.ID_MARCA}" name="txtestado" class="form-control">
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
