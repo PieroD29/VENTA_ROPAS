@@ -280,11 +280,9 @@ public class Controlador_tabla extends HttpServlet {
                     request.setAttribute("clasificacion", lista);
                     break;
                 case "Agregar":
-                    String id_clas = request.getParameter("txtnombre");
                     String descripcion = request.getParameter("txtdescripcion");
-                    String img_dir = request.getParameter("txtestado");
+                    String img_dir = request.getParameter("txtdir_imagen");
 
-                    clasi.setId_clas(Integer.parseInt(id_clas));
                     clasi.setDescripcion(descripcion);
                     clasi.setImg_dir(img_dir);
                     clasificacionDAO.agregar(clasi);
@@ -299,7 +297,7 @@ public class Controlador_tabla extends HttpServlet {
                     break;
                 case "Actualizar":
                     String descripcion1 = request.getParameter("txtdescripcion");
-                    String img_dir1 = request.getParameter("txtestado");
+                    String img_dir1 = request.getParameter("txtdir_imagen");
                     
                     clasi.setDescripcion(descripcion1);
                     clasi.setImg_dir(img_dir1);
@@ -400,11 +398,9 @@ public class Controlador_tabla extends HttpServlet {
                     request.setAttribute("subcategoria", lista);
                     break;
                 case "Agregar":
-                    String id_sbcat = request.getParameter("txtnombre");
                     String descripcion = request.getParameter("txtdescripcion");
-                    String img_dir = request.getParameter("txtestado");
+                    String img_dir = request.getParameter("txtdir_imagen");
 
-                    sbcate.setId_sbcat(Integer.parseInt(id_sbcat));
                     sbcate.setDescripcion(descripcion);
                     sbcate.setImg_dir(img_dir);
                     subCateDAO.agregar(sbcate);
@@ -419,7 +415,7 @@ public class Controlador_tabla extends HttpServlet {
                     break;
                 case "Actualizar":
                     String descripcion1 = request.getParameter("txtdescripcion");
-                    String img_dir1 = request.getParameter("txtestado");
+                    String img_dir1 = request.getParameter("txtdir_imagen");
                     
                     sbcate.setDescripcion(descripcion1);
                     sbcate.setImg_dir(img_dir1);
