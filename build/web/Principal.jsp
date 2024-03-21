@@ -147,7 +147,7 @@
                                 <a class="nav-link text-white" style="font-size: 20px" id="toggleSector2"><i class="fas fa-users"></i>   &nbsp;USUARIOS</a>
                                 <ul id="sector2" class="submenu" style="display: none;">
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" href="Controlador_tabla?menu=Usuarios&accion=Read" target="myFrame">Usuarios</a>
+                                        <a class="nav-link text-white" href="Controlador_tabla?menu=Vendedores&accion=Read" target="myFrame">Usuarios</a>
                                     </li>
                                     
                                 </ul>

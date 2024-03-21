@@ -628,18 +628,19 @@ if (menu.equals("Marca")) {
 
          request.getRequestDispatcher("Marca.jsp").forward(request, response);
      } 
- 
+      
     }
+     
     private String extractFileName(Part part) {
-    String contentDisposition = part.getHeader("content-disposition");
-    String[] items = contentDisposition.split(";");
-    for (String item : items) {
-        if (item.trim().startsWith("filename")) {
-            return item.substring(item.indexOf("=") + 2, item.length() - 1);
+        String contentDisposition = part.getHeader("content-disposition");
+        String[] items = contentDisposition.split(";");
+        for (String item : items) {
+            if (item.trim().startsWith("filename")) {
+                return item.substring(item.indexOf("=") + 2, item.length() - 1);
+            }
         }
+        return "";
     }
-    return "";
-}
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -83,16 +83,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="usua" items="${usuarios}">
+                        <c:forEach var="vende" items="${vendedores}">
                             <tr>
-                                <td> ${usua.getid_user()} </td>
-                                <td> ${usua.getusuario()} </td>
-                                <td> ${usua.getcontra()} </td>
-                                <td> ${usua.getperfil()} </td>
-                                <td>${usua.getnivel()}</td>
-                                <td> ${usua.getotros()}</td>
-                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Usuarios&accion=Update&id=${usua.id_user}">Update</a></td>
-                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Usuarios&accion=Delete&id=${usua.id_user}">Delete</a></td>
+                                <td> ${vende.getid_user()} </td>
+                                <td> ${vende.getusuario()} </td>
+                                <td> ${vende.getcontra()} </td>
+                                <td> ${vende.getperfil()} </td>
+                                <td>${vende.getnivel()}</td>
+                                <td> ${vende.getotros()}</td>
+                                <td><a class="btn btn-warning" href="Controlador_tabla?menu=Vendedores&accion=Update&id=${vende.id_user}">Update</a></td>
+                                <td><a class="btn btn-danger" href="Controlador_tabla?menu=Vendedores&accion=Delete&id=${vende.id_user}">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -103,28 +103,28 @@
         <div class="form-container">
             <div class="card">
                 <div class="card-body">
-                    <form action="Controlador_tabla?menu=Usuarios" action="Controlador_tabla?menu=ReportesUsuarios" method="POST">
-                        <input type="text" name="perfil" id="perfilInput" placeholder="Perfil del Usuario">
-                        <input type="submit" name="accion" value="BuscarUsuario" class="btn btn-outline-info">
+                    <form action="Controlador_tabla?menu=Vendedores" action="Controlador_tabla?menu=ReportesUsuarios" method="POST">
+                        <input type="text" name="codigoempleado" id="perfilInput" placeholder="Perfil del Empleado">
+                        <input type="submit" name="accion" value="BuscarEmpleado" class="btn btn-outline-info">
                         <div class="form-group">
                             <label>USUARIO</label>
-                            <input type="text" value="${usuario.usuario}" name="txtusuario" class="form-control">
+                            <input type="text" value="${vendedor.usuario}" name="txtusuario" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>CONTRASEÑA</label>
-                            <input type="text" value="${usuario.contra}" name="txtcontra" class="form-control">
+                            <input type="password" value="${vendedor.contra}" name="txtcontra" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>PERFIL</label>
-                            <input type="text" value="${usuario.perfil}" name="txtperfil" class="form-control">
+                            <input type="text" value="${vendedor.perfil}" name="txtperfil" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>NIVEL</label>
-                            <input type="text" value="${usuario.nivel}" name="txtnivel" class="form-control">
+                            <input type="text" value="${vendedor.nivel}" name="txtnivel" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>OTROS</label>
-                            <input type="text" value="${usuario.otros}" name="txtotros" class="form-control">
+                            <input type="text" value="${vendedor.otros}" name="txtotros" class="form-control">
                         </div>
                         <input type="submit" name="accion" value="Agregar" class="btn btn-info">
                         <input type="submit" name="accion" value="Actualizar" class="btn btn-success">
