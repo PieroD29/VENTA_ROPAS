@@ -7,6 +7,7 @@
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <explicit-platform explicit-source-supported="true"/>
             <web-module-libraries>
+<<<<<<< HEAD
                 <library dirs="200">
                     <file>${file.reference.mysql-connector-j-8.1.0.jar}</file>
                 </library>
@@ -36,6 +37,9 @@
                     <file>${file.reference.jcommon-1.0.23.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+=======
+                
+>>>>>>> db62c05fc46c0df6a713a38ca7f13085a9e10b54
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
