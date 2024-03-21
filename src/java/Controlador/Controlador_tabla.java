@@ -29,8 +29,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.commons.fileupload2.core.DiskFileItemFactory;
-import org.apache.commons.fileupload2.core.FileItemFactory;
+import java.io.File;
+import jakarta.servlet.http.Part;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
  
  
@@ -277,30 +281,28 @@ public class Controlador_tabla extends HttpServlet {
         if (menu.equals("Clasificacion")) {
             switch (accion) {
                 case "Guardar":
-                    ArrayList<String> lista = new ArrayList<>();
-                    try{
-                        FileItemFactory file = new DiskFileItemFactory();
-                        ServletFileUpload file = new ServletFileUpload(file);
-                        List items = fileUpload.parseRequest(request);
-                        for(int i=0, i<items.size(), i++){
-                            FileItem fileItem=(FileItem)items.get(i);
-                            if(fileItem.isFormField()){
-                                File f = new File("C:\\xampp\\htdocs\\img\\"+fileItem.getName());
-                                fileItem.write(f);
-                                clasi.setImg_dir("http://localhost/img/"+fileItem.getName());    
-                            }else{
-                                lista.add(fileItem.getString());
+                    ArrayList<String> listaimg = new ArrayList<>();
+                    try {
+                        for (Part part : request.getParts()) {
+                            if (!part.getName().equals("file")) { // Ignora los campos de formulario normales
+                                continue;
                             }
+                            String fileName = extractFileName(part); // Obtener nombre del archivo
+                            String uploadPath = "C:\\xampp\\htdocs\\img\\"; // Directorio donde se guardarán los archivos
+                            File file = new File(uploadPath + File.separator + fileName);
+                            part.write(file.getAbsolutePath()); // Guarda el archivo en el directorio de carga
+                            clasi.setImg_dir("http://localhost/img/" + fileName); // Agrega la URL del archivo al objeto clasi
                         }
-                        clasi.setDescripcion(lista.get(0));
-                    } catch (Exception e){
-                    
+                        clasi.setDescripcion(request.getParameter("txtdescripcion")); // Obtener otros datos del formulario
+                        clasificacionDAO.agregar(clasi);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    request.getRequestDispatcher("Controlador_tabla?accion=Read.jsp").forward(request,response);
+                    request.getRequestDispatcher("Controlador_tabla?accion=Read").forward(request, response);
                     break;
                 case "Read":
-                    List<Clasificacion> clasificacion= clasificacionDAO.listar();
-                    request.setAttribute("clasificaciones", clasificacion);
+                    List<Clasificacion> lista= clasificacionDAO.listar();
+                    request.setAttribute("clasificaciones", lista);
                     break;
                 case "Agregar":
                     String id_clas = request.getParameter("txtnombre");
@@ -628,6 +630,16 @@ if (menu.equals("Marca")) {
      } 
  
     }
+    private String extractFileName(Part part) {
+    String contentDisposition = part.getHeader("content-disposition");
+    String[] items = contentDisposition.split(";");
+    for (String item : items) {
+        if (item.trim().startsWith("filename")) {
+            return item.substring(item.indexOf("=") + 2, item.length() - 1);
+        }
+    }
+    return "";
+}
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
