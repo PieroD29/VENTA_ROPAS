@@ -322,12 +322,9 @@ public class Controlador_tabla extends HttpServlet {
                     break;
                 case "Actualizar":
                     String descripcion1 = request.getParameter("txtdescripcion");
-<<<<<<< HEAD
-                    String img_dir1 = request.getParameter("txtestado");
-=======
                     String img_dir1 = request.getParameter("txtdir_imagen");
                     
->>>>>>> db62c05fc46c0df6a713a38ca7f13085a9e10b54
+ 
                     clasi.setDescripcion(descripcion1);
                     clasi.setImg_dir(img_dir1);
                     clasi.setId_clas(ide);
